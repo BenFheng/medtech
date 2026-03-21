@@ -6,7 +6,7 @@ export default function SignUpPage() {
       <div className="text-center space-y-8">
         <div>
           <h1 className="font-headline font-black text-3xl text-on-surface tracking-tighter">
-            VANGUARD
+            MEDTECH
           </h1>
           <p className="text-on-surface-variant text-sm mt-2">
             Create your account to begin your protocol

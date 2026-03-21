@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Vanguard | Cellular Optimization Defined",
+  title: "MedTech | Cellular Optimization Defined",
   description:
     "Doctor-formulated, data-driven supplement stacks for high-performing professionals. Clinical-grade precision meets algorithmic optimization.",
 };

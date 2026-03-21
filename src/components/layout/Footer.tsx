@@ -26,7 +26,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="font-headline font-black tracking-tighter text-2xl text-on-surface">
-              VANGUARD
+              MEDTECH
             </Link>
             <p className="mt-4 font-body text-sm leading-relaxed text-on-surface-variant">
               Precision supplements engineered from clinical evidence. Your biology, optimized.
@@ -94,7 +94,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-16 pt-8">
           <p className="font-body text-xs text-on-surface-variant">
-            &copy; {new Date().getFullYear()} Vanguard Health Sciences. All rights reserved.
+            &copy; {new Date().getFullYear()} MedTech Health Sciences. All rights reserved.
           </p>
         </div>
       </div>

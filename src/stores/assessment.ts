@@ -100,7 +100,7 @@ export const useAssessmentStore = create<AssessmentState>()(
       reset: () => set(initialState),
     }),
     {
-      name: "vanguard-assessment",
+      name: "medtech-assessment",
     }
   )
 );

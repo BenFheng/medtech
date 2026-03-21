@@ -2,13 +2,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Show, UserButton, SignInButton, SignUpButton } from '@clerk/nextjs';
+import { Show, SignInButton, SignUpButton } from '@clerk/nextjs';
 
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Our Science', href: '/science' },
   { label: 'Protocols', href: '/protocols' },
-  { label: 'Account', href: '/account' },
 ];
 
 export default function Navbar() {
@@ -20,7 +19,7 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link href="/" className="font-headline font-black tracking-tighter text-2xl text-on-surface">
-          VANGUARD
+          MEDTECH
         </Link>
 
         {/* Desktop Navigation */}
@@ -64,13 +63,13 @@ export default function Navbar() {
             >
               My Protocol
             </Link>
-            <UserButton
-              appearance={{
-                elements: {
-                  avatarBox: "w-9 h-9",
-                },
-              }}
-            />
+            <Link
+              href="/account"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-surface-container-high text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-colors"
+              aria-label="Account"
+            >
+              <span className="material-symbols-outlined text-xl">person</span>
+            </Link>
           </Show>
         </div>
 
@@ -134,9 +133,13 @@ export default function Navbar() {
               >
                 My Protocol
               </Link>
-              <div className="flex justify-center pt-2">
-                <UserButton />
-              </div>
+              <Link
+                href="/account"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block rounded-lg bg-surface-container-high px-6 py-3 text-center font-headline font-bold text-on-surface text-sm transition-all active:scale-95"
+              >
+                Account
+              </Link>
             </Show>
           </div>
         </div>

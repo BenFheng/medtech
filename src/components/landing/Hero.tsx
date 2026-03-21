@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center relative z-10">
         <div className="max-w-2xl">
           <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface leading-[1.1] mb-6">
-            Doctor-Formulated,{" "}
+            Doctor-Formulated,<br />
             <span className="vitality-gradient-text">
               Data-Driven Performance Stacks.
             </span>
