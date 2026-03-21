@@ -1,0 +1,601 @@
+[
+  {
+    "id": "l-theanine",
+    "name": "L-Theanine",
+    "category": "cognitive",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 200,
+      "unit": "mg",
+      "form": "Suntheanine (patented pure L-isomer form)"
+    },
+    "targets": ["focus", "calm-alertness", "attention"],
+    "symptoms": ["mental fatigue", "difficulty concentrating", "stress-induced brain fog", "anxious restlessness"],
+    "interactions": {
+      "synergies": [
+        { "compound": "alpha-gpc", "reason": "L-Theanine modulates alpha brain waves while Alpha-GPC boosts acetylcholine, producing sustained calm focus" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 42 },
+    "pricePerMonth": 8
+  },
+  {
+    "id": "lions-mane",
+    "name": "Lion's Mane (Hericium erinaceus)",
+    "category": "cognitive",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 1000,
+      "unit": "mg",
+      "form": "Dual-extracted fruiting body standardized to 30% beta-glucans and hericenones"
+    },
+    "targets": ["neurogenesis", "memory", "nerve-growth-factor"],
+    "symptoms": ["poor memory recall", "mild cognitive decline", "brain fog", "slow mental processing"],
+    "interactions": {
+      "synergies": [
+        { "compound": "bacopa-monnieri", "reason": "Lion's Mane promotes NGF synthesis while Bacopa enhances synaptic communication, supporting complementary neuroplasticity pathways" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 28 },
+    "pricePerMonth": 22
+  },
+  {
+    "id": "bacopa-monnieri",
+    "name": "Bacopa Monnieri",
+    "category": "cognitive",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 300,
+      "unit": "mg",
+      "form": "Standardized to 50% bacosides (Bacognize or Synapsa extract)"
+    },
+    "targets": ["memory-consolidation", "learning", "neuroprotection"],
+    "symptoms": ["forgetfulness", "difficulty learning new information", "age-related memory decline", "mental sluggishness"],
+    "interactions": {
+      "synergies": [
+        { "compound": "phosphatidylserine", "reason": "Bacopa enhances cholinergic signaling while PS supports neuronal membrane fluidity, amplifying memory encoding" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 36 },
+    "pricePerMonth": 12
+  },
+  {
+    "id": "alpha-gpc",
+    "name": "Alpha-GPC",
+    "category": "cognitive",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 300,
+      "unit": "mg",
+      "form": "Alpha-glycerylphosphorylcholine 50% granular"
+    },
+    "targets": ["acetylcholine-synthesis", "focus", "working-memory"],
+    "symptoms": ["poor concentration", "mental fatigue during tasks", "difficulty multitasking", "reduced verbal fluency"],
+    "interactions": {
+      "synergies": [
+        { "compound": "l-theanine", "reason": "Alpha-GPC supplies acetylcholine precursor while L-Theanine promotes alpha wave activity, creating calm yet sharp focus" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 31 },
+    "pricePerMonth": 16
+  },
+  {
+    "id": "phosphatidylserine",
+    "name": "Phosphatidylserine",
+    "category": "cognitive",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 100,
+      "unit": "mg",
+      "form": "Soy-free sunflower-derived phosphatidylserine (Sharp-PS)"
+    },
+    "targets": ["cortisol-regulation", "memory", "cell-membrane-integrity"],
+    "symptoms": ["stress-related memory issues", "elevated cortisol", "age-related cognitive decline", "poor exercise recovery"],
+    "interactions": {
+      "synergies": [
+        { "compound": "omega-3-epa-dha", "reason": "Omega-3 fatty acids incorporate into PS-enriched membranes, enhancing neuronal signaling efficiency and membrane fluidity" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 34 },
+    "pricePerMonth": 14
+  },
+  {
+    "id": "magnesium-bisglycinate",
+    "name": "Magnesium Bisglycinate",
+    "category": "sleep-stress",
+    "schedule": "PM",
+    "dosage": {
+      "amount": 400,
+      "unit": "mg",
+      "form": "Chelated magnesium bisglycinate (providing ~80mg elemental magnesium)"
+    },
+    "targets": ["sleep-quality", "muscle-relaxation", "stress-reduction", "gaba-activity"],
+    "symptoms": ["difficulty falling asleep", "muscle cramps", "restless legs", "stress-related tension", "anxiety"],
+    "interactions": {
+      "synergies": [
+        { "compound": "glycine", "reason": "Magnesium bisglycinate provides both magnesium and glycine; additional glycine amplifies inhibitory neurotransmission and thermoregulation for deeper sleep" }
+      ],
+      "antagonisms": [
+        { "compound": "zinc-picolinate", "reason": "High-dose magnesium and zinc compete for absorption via shared intestinal transporters; take at least 2 hours apart" }
+      ]
+    },
+    "evidence": { "level": "A", "citations": 48 },
+    "pricePerMonth": 10
+  },
+  {
+    "id": "ashwagandha-ksm-66",
+    "name": "Ashwagandha KSM-66",
+    "category": "sleep-stress",
+    "schedule": "PM",
+    "dosage": {
+      "amount": 600,
+      "unit": "mg",
+      "form": "KSM-66 full-spectrum root extract standardized to 5% withanolides"
+    },
+    "targets": ["cortisol-reduction", "stress-resilience", "thyroid-support", "sleep-onset"],
+    "symptoms": ["chronic stress", "elevated cortisol", "difficulty winding down", "stress-related fatigue", "poor sleep onset"],
+    "interactions": {
+      "synergies": [
+        { "compound": "magnesium-bisglycinate", "reason": "Ashwagandha lowers cortisol via HPA axis modulation while magnesium promotes GABAergic relaxation, creating synergistic stress relief" }
+      ],
+      "antagonisms": [
+        { "compound": "rhodiola-rosea", "reason": "Both are potent adaptogens acting on the HPA axis; concurrent use can cause overstimulation or blunted response — choose one based on primary goal" }
+      ]
+    },
+    "evidence": { "level": "A", "citations": 52 },
+    "pricePerMonth": 14
+  },
+  {
+    "id": "apigenin",
+    "name": "Apigenin",
+    "category": "sleep-stress",
+    "schedule": "PM",
+    "dosage": {
+      "amount": 50,
+      "unit": "mg",
+      "form": "Extracted from chamomile (Matricaria chamomilla), high-purity crystalline apigenin"
+    },
+    "targets": ["sleep-onset", "gaba-modulation", "anxiolysis"],
+    "symptoms": ["difficulty falling asleep", "racing thoughts at night", "mild anxiety", "restless sleep"],
+    "interactions": {
+      "synergies": [
+        { "compound": "magnesium-bisglycinate", "reason": "Apigenin binds GABA-A receptors as a positive allosteric modulator while magnesium supports overall GABAergic tone for enhanced sedation" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 18 },
+    "pricePerMonth": 8
+  },
+  {
+    "id": "l-tryptophan",
+    "name": "L-Tryptophan",
+    "category": "sleep-stress",
+    "schedule": "PM",
+    "dosage": {
+      "amount": 500,
+      "unit": "mg",
+      "form": "Pharmaceutical-grade free-form L-tryptophan"
+    },
+    "targets": ["serotonin-synthesis", "melatonin-precursor", "mood-support"],
+    "symptoms": ["poor sleep quality", "low mood", "carbohydrate cravings", "seasonal mood changes", "difficulty staying asleep"],
+    "interactions": {
+      "synergies": [
+        { "compound": "vitamin-b-complex-methylated", "reason": "B6 (as P5P) is a required cofactor for converting tryptophan to serotonin via aromatic amino acid decarboxylase" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 38 },
+    "pricePerMonth": 10
+  },
+  {
+    "id": "glycine",
+    "name": "Glycine",
+    "category": "sleep-stress",
+    "schedule": "PM",
+    "dosage": {
+      "amount": 3,
+      "unit": "g",
+      "form": "Pharmaceutical-grade free-form glycine powder"
+    },
+    "targets": ["sleep-architecture", "core-body-temperature", "next-day-alertness"],
+    "symptoms": ["non-restorative sleep", "difficulty reaching deep sleep", "daytime drowsiness", "elevated core body temperature at night"],
+    "interactions": {
+      "synergies": [
+        { "compound": "magnesium-bisglycinate", "reason": "Glycine lowers core body temperature via peripheral vasodilation while magnesium enhances GABA signaling, improving overall sleep architecture" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 22 },
+    "pricePerMonth": 6
+  },
+  {
+    "id": "nmn",
+    "name": "NMN (Nicotinamide Mononucleotide)",
+    "category": "longevity",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 500,
+      "unit": "mg",
+      "form": "Enzymatically synthesized beta-nicotinamide mononucleotide, >99% purity"
+    },
+    "targets": ["nad-plus-biosynthesis", "cellular-energy", "dna-repair", "sirtuin-activation"],
+    "symptoms": ["age-related fatigue", "declining exercise capacity", "slow recovery", "reduced metabolic efficiency"],
+    "interactions": {
+      "synergies": [
+        { "compound": "trans-resveratrol", "reason": "NMN raises NAD+ levels as substrate while resveratrol activates SIRT1 which requires NAD+ as a cofactor, creating a powerful sirtuin-activating stack" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 45 },
+    "pricePerMonth": 28
+  },
+  {
+    "id": "trans-resveratrol",
+    "name": "Trans-Resveratrol",
+    "category": "longevity",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 500,
+      "unit": "mg",
+      "form": "Micronized trans-resveratrol from Polygonum cuspidatum, >98% purity"
+    },
+    "targets": ["sirtuin-activation", "antioxidant-defense", "cardiovascular-health", "anti-inflammatory"],
+    "symptoms": ["oxidative stress markers", "cardiovascular aging", "chronic low-grade inflammation", "metabolic slowdown"],
+    "interactions": {
+      "synergies": [
+        { "compound": "nmn", "reason": "Resveratrol activates SIRT1 enzymatic activity while NMN ensures adequate NAD+ substrate availability, maximizing sirtuin-mediated longevity pathways" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 64 },
+    "pricePerMonth": 22
+  },
+  {
+    "id": "coq10-ubiquinol",
+    "name": "CoQ10 Ubiquinol",
+    "category": "longevity",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 200,
+      "unit": "mg",
+      "form": "Kaneka Ubiquinol (reduced form of CoQ10) in lipid-based softgel for enhanced absorption"
+    },
+    "targets": ["mitochondrial-function", "cellular-energy", "cardiovascular-health", "antioxidant-defense"],
+    "symptoms": ["low energy", "statin-related muscle fatigue", "cardiovascular aging", "exercise intolerance", "gum disease"],
+    "interactions": {
+      "synergies": [
+        { "compound": "pqq", "reason": "CoQ10 optimizes existing mitochondrial electron transport chain function while PQQ stimulates mitochondrial biogenesis, increasing both quality and quantity of mitochondria" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 78 },
+    "pricePerMonth": 24
+  },
+  {
+    "id": "pqq",
+    "name": "PQQ (Pyrroloquinoline Quinone)",
+    "category": "longevity",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 20,
+      "unit": "mg",
+      "form": "BioPQQ (natural fermentation-derived pyrroloquinoline quinone disodium salt)"
+    },
+    "targets": ["mitochondrial-biogenesis", "neuroprotection", "nerve-growth-factor", "antioxidant-defense"],
+    "symptoms": ["persistent fatigue", "brain fog", "slow cognitive processing", "poor mitochondrial function"],
+    "interactions": {
+      "synergies": [
+        { "compound": "coq10-ubiquinol", "reason": "PQQ activates PGC-1alpha to trigger new mitochondria formation while CoQ10 ensures these new mitochondria function optimally in ATP production" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 19 },
+    "pricePerMonth": 18
+  },
+  {
+    "id": "astaxanthin",
+    "name": "Astaxanthin",
+    "category": "longevity",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 12,
+      "unit": "mg",
+      "form": "Derived from Haematococcus pluvialis microalgae, supercritical CO2 extracted"
+    },
+    "targets": ["antioxidant-defense", "skin-protection", "eye-health", "cardiovascular-health"],
+    "symptoms": ["UV skin damage", "eye fatigue", "exercise-induced oxidative stress", "inflammatory markers"],
+    "interactions": {
+      "synergies": [
+        { "compound": "omega-3-epa-dha", "reason": "Astaxanthin protects omega-3 fatty acids from lipid peroxidation, preserving their anti-inflammatory potency and improving bioavailability" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 33 },
+    "pricePerMonth": 16
+  },
+  {
+    "id": "phytoceramides",
+    "name": "Phytoceramides",
+    "category": "skin-radiance",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 350,
+      "unit": "mg",
+      "form": "Rice-derived phytoceramides (Ceramide-PCD) standardized to glucosylceramides"
+    },
+    "targets": ["skin-barrier", "hydration", "anti-wrinkle"],
+    "symptoms": ["dry flaky skin", "compromised skin barrier", "fine lines", "rough skin texture"],
+    "interactions": {
+      "synergies": [
+        { "compound": "hyaluronic-acid", "reason": "Phytoceramides restore the lipid barrier matrix while hyaluronic acid retains moisture within the dermis, providing comprehensive skin hydration from different mechanisms" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 14 },
+    "pricePerMonth": 16
+  },
+  {
+    "id": "hyaluronic-acid",
+    "name": "Hyaluronic Acid",
+    "category": "skin-radiance",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 200,
+      "unit": "mg",
+      "form": "Low molecular weight hyaluronic acid (< 100 kDa) for enhanced oral bioavailability"
+    },
+    "targets": ["skin-hydration", "joint-lubrication", "dermal-volume"],
+    "symptoms": ["skin dehydration", "loss of skin plumpness", "joint stiffness", "dull complexion"],
+    "interactions": {
+      "synergies": [
+        { "compound": "vitamin-c-liposomal", "reason": "Vitamin C stimulates endogenous hyaluronic acid synthesis by fibroblasts, amplifying the effect of supplemental HA intake" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 21 },
+    "pricePerMonth": 14
+  },
+  {
+    "id": "vitamin-c-liposomal",
+    "name": "Vitamin C Liposomal",
+    "category": "skin-radiance",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 1000,
+      "unit": "mg",
+      "form": "Liposomal-encapsulated ascorbic acid in phospholipid vesicles for bypass of intestinal absorption limits"
+    },
+    "targets": ["collagen-synthesis", "antioxidant-defense", "immune-support", "skin-brightening"],
+    "symptoms": ["dull skin tone", "slow wound healing", "frequent colds", "easy bruising", "premature aging"],
+    "interactions": {
+      "synergies": [
+        { "compound": "collagen-peptides", "reason": "Vitamin C is an essential cofactor for prolyl hydroxylase and lysyl hydroxylase, enzymes required for collagen triple helix stabilization and crosslinking" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 56 },
+    "pricePerMonth": 18
+  },
+  {
+    "id": "collagen-peptides",
+    "name": "Collagen Peptides (Type I & III)",
+    "category": "skin-radiance",
+    "schedule": "AM/PM",
+    "dosage": {
+      "amount": 10,
+      "unit": "g",
+      "form": "Hydrolyzed bovine collagen peptides (Type I & III), enzymatically broken to 2-5 kDa for optimal absorption"
+    },
+    "targets": ["skin-elasticity", "hair-strength", "nail-growth", "joint-health"],
+    "symptoms": ["skin sagging", "brittle nails", "thinning hair", "joint discomfort", "loss of skin elasticity"],
+    "interactions": {
+      "synergies": [
+        { "compound": "vitamin-c-liposomal", "reason": "Vitamin C is required for hydroxylation of proline and lysine residues during collagen synthesis, making it indispensable for converting ingested peptides into functional collagen fibers" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 41 },
+    "pricePerMonth": 22
+  },
+  {
+    "id": "vitamin-d3",
+    "name": "Vitamin D3",
+    "category": "foundation",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 5000,
+      "unit": "IU",
+      "form": "Cholecalciferol from lanolin, microencapsulated in MCT oil for fat-soluble absorption"
+    },
+    "targets": ["bone-density", "immune-modulation", "mood-support", "calcium-absorption"],
+    "symptoms": ["low vitamin D levels", "seasonal mood changes", "frequent illness", "bone weakness", "muscle weakness"],
+    "interactions": {
+      "synergies": [
+        { "compound": "vitamin-k2-mk7", "reason": "D3 upregulates calcium absorption while K2 activates osteocalcin and matrix GLA protein to direct calcium into bones and away from arterial walls, preventing vascular calcification" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 92 },
+    "pricePerMonth": 6
+  },
+  {
+    "id": "vitamin-k2-mk7",
+    "name": "Vitamin K2 MK-7",
+    "category": "foundation",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 200,
+      "unit": "mcg",
+      "form": "MenaQ7 all-trans menaquinone-7 from Bacillus subtilis natto fermentation"
+    },
+    "targets": ["calcium-metabolism", "bone-density", "cardiovascular-protection", "arterial-health"],
+    "symptoms": ["concern about calcium deposits", "bone density loss", "arterial stiffness", "poor calcium utilization"],
+    "interactions": {
+      "synergies": [
+        { "compound": "vitamin-d3", "reason": "K2 MK-7 activates vitamin K-dependent proteins (osteocalcin, MGP) that properly direct the increased calcium absorption caused by D3 supplementation" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 37 },
+    "pricePerMonth": 10
+  },
+  {
+    "id": "omega-3-epa-dha",
+    "name": "Omega-3 EPA/DHA",
+    "category": "foundation",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 2000,
+      "unit": "mg",
+      "form": "Triglyceride-form fish oil (wild-caught small fish), providing 1200mg EPA + 800mg DHA, IFOS 5-star certified"
+    },
+    "targets": ["cardiovascular-health", "anti-inflammatory", "brain-health", "cell-membrane-integrity"],
+    "symptoms": ["chronic inflammation", "high triglycerides", "dry eyes", "joint stiffness", "poor concentration"],
+    "interactions": {
+      "synergies": [
+        { "compound": "astaxanthin", "reason": "Astaxanthin is a lipophilic antioxidant that protects EPA/DHA from oxidation, preserving omega-3 integrity both in the supplement and in vivo" }
+      ],
+      "antagonisms": [
+        { "compound": "blood-thinners", "reason": "SAFETY FLAG: Omega-3 at therapeutic doses (>2g EPA+DHA) may potentiate anticoagulant effects of warfarin, aspirin, and other blood thinners — consult physician before combining" }
+      ]
+    },
+    "evidence": { "level": "A", "citations": 124 },
+    "pricePerMonth": 18
+  },
+  {
+    "id": "zinc-picolinate",
+    "name": "Zinc Picolinate",
+    "category": "foundation",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 30,
+      "unit": "mg",
+      "form": "Zinc picolinate chelate (providing ~7mg elemental zinc per capsule)"
+    },
+    "targets": ["immune-function", "testosterone-support", "skin-health", "wound-healing"],
+    "symptoms": ["frequent colds", "slow wound healing", "acne", "white spots on nails", "low testosterone symptoms"],
+    "interactions": {
+      "synergies": [
+        { "compound": "vitamin-c-liposomal", "reason": "Vitamin C and zinc jointly support immune cell function — C enhances neutrophil motility while zinc is critical for T-cell maturation" }
+      ],
+      "antagonisms": [
+        { "compound": "copper", "reason": "Zinc induces metallothionein in enterocytes which binds copper and prevents its absorption; prolonged zinc supplementation above 30mg/day can induce copper deficiency" },
+        { "compound": "magnesium-bisglycinate", "reason": "Zinc and magnesium compete for shared divalent cation transporters in the intestine; separate doses by at least 2 hours for optimal absorption" }
+      ]
+    },
+    "evidence": { "level": "A", "citations": 58 },
+    "pricePerMonth": 8
+  },
+  {
+    "id": "vitamin-b-complex-methylated",
+    "name": "B-Complex Methylated",
+    "category": "foundation",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 1,
+      "unit": "mg",
+      "form": "Full-spectrum methylated B-complex: B1 benfotiamine, B2 riboflavin-5-phosphate, B3 niacinamide, B5 pantethine, B6 pyridoxal-5-phosphate, B9 L-methylfolate (Quatrefolic), B12 methylcobalamin + adenosylcobalamin, biotin"
+    },
+    "targets": ["energy-metabolism", "methylation", "homocysteine-regulation", "nervous-system-support"],
+    "symptoms": ["low energy", "elevated homocysteine", "poor methylation", "mood instability", "nerve tingling", "MTHFR polymorphism concerns"],
+    "interactions": {
+      "synergies": [
+        { "compound": "l-tryptophan", "reason": "Vitamin B6 (as P5P) serves as a required cofactor for converting 5-HTP to serotonin, amplifying L-tryptophan supplementation efficacy" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 67 },
+    "pricePerMonth": 14
+  },
+  {
+    "id": "selenium",
+    "name": "Selenium",
+    "category": "foundation",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 200,
+      "unit": "mcg",
+      "form": "SelenoExcell high-selenium yeast providing selenomethionine and full spectrum of selenium species"
+    },
+    "targets": ["thyroid-function", "antioxidant-defense", "immune-support", "dna-protection"],
+    "symptoms": ["thyroid sluggishness", "oxidative stress", "weakened immunity", "poor detoxification"],
+    "interactions": {
+      "synergies": [
+        { "compound": "vitamin-d3", "reason": "Selenium-dependent deiodinase enzymes convert T4 to active T3 thyroid hormone; adequate selenium supports thyroid function alongside D3 immune modulation" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 44 },
+    "pricePerMonth": 7
+  },
+  {
+    "id": "rhodiola-rosea",
+    "name": "Rhodiola Rosea",
+    "category": "performance",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 400,
+      "unit": "mg",
+      "form": "Standardized to 3% rosavins and 1% salidroside (SHR-5 extract)"
+    },
+    "targets": ["physical-endurance", "mental-stamina", "stress-adaptation", "fatigue-resistance"],
+    "symptoms": ["exercise fatigue", "burnout", "physical performance plateau", "mental exhaustion under stress"],
+    "interactions": {
+      "synergies": [
+        { "compound": "creatine-monohydrate", "reason": "Rhodiola improves oxygen utilization and reduces perceived exertion while creatine boosts phosphocreatine stores, enhancing both aerobic and anaerobic performance" }
+      ],
+      "antagonisms": [
+        { "compound": "ashwagandha-ksm-66", "reason": "Both are potent adaptogens modulating the HPA axis; stacking may cause receptor desensitization, unpredictable cortisol fluctuations, or blunted adaptogenic response — use one at a time" }
+      ]
+    },
+    "evidence": { "level": "A", "citations": 39 },
+    "pricePerMonth": 12
+  },
+  {
+    "id": "creatine-monohydrate",
+    "name": "Creatine Monohydrate",
+    "category": "performance",
+    "schedule": "AM/PM",
+    "dosage": {
+      "amount": 5,
+      "unit": "g",
+      "form": "Creapure micronized creatine monohydrate (German-manufactured, HPLC tested for purity)"
+    },
+    "targets": ["atp-regeneration", "strength", "cognitive-performance", "lean-mass"],
+    "symptoms": ["strength plateau", "poor exercise recovery", "cognitive fatigue during demanding tasks", "reduced power output"],
+    "interactions": {
+      "synergies": [
+        { "compound": "rhodiola-rosea", "reason": "Creatine saturates phosphocreatine stores for rapid ATP regeneration while Rhodiola reduces perceived exertion, enabling higher training volume and intensity" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "A", "citations": 186 },
+    "pricePerMonth": 8
+  },
+  {
+    "id": "cordyceps-militaris",
+    "name": "Cordyceps Militaris",
+    "category": "performance",
+    "schedule": "AM",
+    "dosage": {
+      "amount": 1000,
+      "unit": "mg",
+      "form": "Fruiting body extract standardized to 0.3% cordycepin and 25% beta-glucans"
+    },
+    "targets": ["oxygen-utilization", "endurance", "atp-production", "respiratory-health"],
+    "symptoms": ["poor exercise endurance", "reduced VO2 max", "altitude-related fatigue", "low stamina"],
+    "interactions": {
+      "synergies": [
+        { "compound": "coq10-ubiquinol", "reason": "Cordyceps enhances oxygen delivery and ATP production via cordycepin while CoQ10 optimizes mitochondrial electron transport, boosting overall aerobic energy output" }
+      ],
+      "antagonisms": []
+    },
+    "evidence": { "level": "B", "citations": 24 },
+    "pricePerMonth": 18
+  }
+]
