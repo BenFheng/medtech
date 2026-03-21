@@ -2,19 +2,19 @@ export default function ValueProps() {
   return (
     <>
       {/* The Unfair Advantage Section */}
-      <section className="bg-surface py-24 px-6">
+      <section className="bg-surface py-14 sm:py-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-headline text-4xl font-bold tracking-tight text-on-surface mb-4">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="font-headline text-3xl sm:text-4xl font-bold tracking-tight text-on-surface mb-4">
               The Unfair Advantage
             </h2>
-            <p className="text-on-surface-variant font-body max-w-xl mx-auto">
+            <p className="text-on-surface-variant font-body max-w-xl mx-auto text-sm sm:text-base">
               Where clinical rigour meets architectural precision to define the
               next era of longevity.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-surface-container-low p-10 rounded-xl flex flex-col items-start space-y-6 group hover:bg-surface-container-lowest transition-colors">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+            <div className="bg-surface-container-low p-6 sm:p-10 rounded-xl flex flex-col items-start space-y-5 sm:space-y-6 group hover:bg-surface-container-lowest transition-colors">
               <div className="w-16 h-16 bg-primary-container/10 flex items-center justify-center rounded-full text-primary">
                 <span
                   className="material-symbols-outlined text-4xl"
@@ -24,7 +24,7 @@ export default function ValueProps() {
                 </span>
               </div>
               <div>
-                <h3 className="font-headline text-2xl font-bold text-primary mb-2">
+                <h3 className="font-headline text-xl sm:text-2xl font-bold text-primary mb-2">
                   Clinical Authority
                 </h3>
                 <p className="text-on-surface-variant leading-relaxed">
@@ -43,7 +43,7 @@ export default function ValueProps() {
               </div>
             </div>
 
-            <div className="bg-surface-container-low p-10 rounded-xl flex flex-col items-start space-y-6 group hover:bg-surface-container-lowest transition-colors">
+            <div className="bg-surface-container-low p-6 sm:p-10 rounded-xl flex flex-col items-start space-y-5 sm:space-y-6 group hover:bg-surface-container-lowest transition-colors">
               <div className="w-16 h-16 bg-primary-container/10 flex items-center justify-center rounded-full text-primary">
                 <span
                   className="material-symbols-outlined text-4xl"
@@ -53,7 +53,7 @@ export default function ValueProps() {
                 </span>
               </div>
               <div>
-                <h3 className="font-headline text-2xl font-bold text-primary mb-2">
+                <h3 className="font-headline text-xl sm:text-2xl font-bold text-primary mb-2">
                   Engineering Precision
                 </h3>
                 <p className="text-on-surface-variant leading-relaxed">
@@ -76,10 +76,10 @@ export default function ValueProps() {
       </section>
 
       {/* Core Values Section */}
-      <section className="bg-surface-container-low py-24 px-6">
+      <section className="bg-surface-container-low py-14 sm:py-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="bg-surface-container-lowest p-8 rounded-xl">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-surface-container-lowest p-6 sm:p-8 rounded-xl">
               <span className="material-symbols-outlined text-primary text-4xl mb-6 block">
                 biotech
               </span>
@@ -92,7 +92,7 @@ export default function ValueProps() {
                 standards.
               </p>
             </div>
-            <div className="bg-surface-container-lowest p-8 rounded-xl">
+            <div className="bg-surface-container-lowest p-6 sm:p-8 rounded-xl">
               <span className="material-symbols-outlined text-primary text-4xl mb-6 block">
                 insights
               </span>
@@ -104,7 +104,7 @@ export default function ValueProps() {
                 biomarkers, wearable data, and periodic clinical reassessments.
               </p>
             </div>
-            <div className="bg-surface-container-lowest p-8 rounded-xl">
+            <div className="bg-surface-container-lowest p-6 sm:p-8 rounded-xl">
               <span className="material-symbols-outlined text-primary text-4xl mb-6 block">
                 auto_awesome
               </span>

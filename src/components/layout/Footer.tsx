@@ -21,10 +21,10 @@ const connectLinks = [
 export default function Footer() {
   return (
     <footer className="bg-surface-container">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16">
+        <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-4">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="font-headline font-black tracking-tighter text-2xl text-on-surface">
               MEDTECH
             </Link>
@@ -43,7 +43,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-body text-sm text-on-surface-variant transition-colors hover:text-primary"
+                    className="font-body text-sm text-on-surface-variant transition-colors hover:text-primary inline-block py-1 min-h-[44px] flex items-center"
                   >
                     {link.label}
                   </Link>
@@ -62,7 +62,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-body text-sm text-on-surface-variant transition-colors hover:text-primary"
+                    className="font-body text-sm text-on-surface-variant transition-colors hover:text-primary inline-block py-1 min-h-[44px] flex items-center"
                   >
                     {link.label}
                   </Link>
@@ -81,7 +81,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-body text-sm text-on-surface-variant transition-colors hover:text-primary"
+                    className="font-body text-sm text-on-surface-variant transition-colors hover:text-primary inline-block py-1 min-h-[44px] flex items-center"
                   >
                     {link.label}
                   </Link>
@@ -92,7 +92,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-16 pt-8">
+        <div className="mt-10 sm:mt-16 pt-6 sm:pt-8">
           <p className="font-body text-xs text-on-surface-variant">
             &copy; {new Date().getFullYear()} MedTech Health Sciences. All rights reserved.
           </p>

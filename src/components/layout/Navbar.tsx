@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Show, SignInButton, SignUpButton } from '@clerk/nextjs';
+import { Show, SignInButton, SignUpButton, useUser } from '@clerk/nextjs';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -13,6 +13,7 @@ const navLinks = [
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('/');
+  const { user } = useUser();
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl">
@@ -61,7 +62,7 @@ export default function Navbar() {
               href="/dashboard"
               className="text-primary font-headline font-semibold text-sm hover:text-primary-container transition-colors"
             >
-              My Protocol
+              {user?.firstName ? `${user.firstName}'s Protocol` : "My Protocol"}
             </Link>
             <Link
               href="/account"
@@ -131,7 +132,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="block rounded-lg vitality-gradient px-6 py-3 text-center font-headline font-bold text-on-primary text-sm transition-all active:scale-95"
               >
-                My Protocol
+                {user?.firstName ? `${user.firstName}'s Protocol` : "My Protocol"}
               </Link>
               <Link
                 href="/account"

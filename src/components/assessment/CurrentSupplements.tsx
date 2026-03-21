@@ -72,7 +72,7 @@ export default function CurrentSupplements() {
   };
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-10 md:space-y-16">
       <div className="space-y-4 text-center md:text-left">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed/30 text-primary rounded-full">
           <span className="material-symbols-outlined text-[18px]">
@@ -82,30 +82,30 @@ export default function CurrentSupplements() {
             Step 04 / 04
           </span>
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-extrabold text-on-background tracking-tight leading-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-headline font-extrabold text-on-background tracking-tight leading-tight">
           What are you currently taking?
         </h1>
-        <p className="text-on-surface-variant text-lg max-w-xl font-body">
+        <p className="text-on-surface-variant text-base md:text-lg max-w-xl font-body">
           This safety screen helps us avoid interactions and prevent
           redundancies in your protocol.
         </p>
       </div>
 
-      <div className="space-y-12">
+      <div className="space-y-8 md:space-y-12">
         {/* Current Supplements */}
         <div className="space-y-4">
-          <h3 className="font-headline font-bold text-xl text-on-surface">
+          <h3 className="font-headline font-bold text-lg md:text-xl text-on-surface">
             Current Supplements
           </h3>
           <p className="text-on-surface-variant text-sm">
             Select any supplements you&apos;re already taking regularly.
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 md:gap-3">
             {commonSupplements.map((supp) => (
               <button
                 key={supp}
                 onClick={() => toggleSupplement(supp)}
-                className={`px-5 py-2.5 rounded-full font-body font-medium text-sm transition-all active:scale-95 ${
+                className={`px-4 py-2.5 rounded-full font-body font-medium text-sm transition-all active:scale-95 min-h-[44px] ${
                   currentSupplements.includes(supp)
                     ? "bg-primary text-on-primary"
                     : "bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high"
@@ -115,18 +115,18 @@ export default function CurrentSupplements() {
               </button>
             ))}
           </div>
-          <div className="flex gap-3 mt-4">
+          <div className="flex gap-2 md:gap-3 mt-4">
             <input
               type="text"
               value={customSupplement}
               onChange={(e) => setCustomSupplement(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && addCustomSupplement()}
               placeholder="Add another supplement..."
-              className="flex-1 px-4 py-3 bg-surface-container-lowest rounded-lg text-on-surface font-body border-b-2 border-transparent focus:border-primary focus:outline-none transition-colors"
+              className="flex-1 px-4 py-3 bg-surface-container-lowest rounded-lg text-on-surface font-body border-b-2 border-transparent focus:border-primary focus:outline-none transition-colors text-base min-h-[44px]"
             />
             <button
               onClick={addCustomSupplement}
-              className="px-4 py-3 bg-surface-container-high text-primary rounded-lg font-headline font-bold hover:bg-surface-container-highest transition-colors"
+              className="px-5 py-3 bg-surface-container-high text-primary rounded-lg font-headline font-bold hover:bg-surface-container-highest transition-colors min-h-[44px] min-w-[64px]"
             >
               Add
             </button>
@@ -135,11 +135,11 @@ export default function CurrentSupplements() {
 
         {/* Medications */}
         <div className="space-y-4">
-          <h3 className="font-headline font-bold text-xl text-on-surface">
+          <h3 className="font-headline font-bold text-lg md:text-xl text-on-surface">
             Current Medications
           </h3>
           <div className="bg-tertiary-fixed/20 p-4 rounded-xl flex items-start gap-3">
-            <span className="material-symbols-outlined text-tertiary text-xl mt-0.5">
+            <span className="material-symbols-outlined text-tertiary text-xl mt-0.5 shrink-0">
               warning
             </span>
             <p className="text-on-surface-variant text-sm">
@@ -149,12 +149,12 @@ export default function CurrentSupplements() {
               clinical privacy policy.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
             {medicationCategories.map((med) => (
               <button
                 key={med}
                 onClick={() => toggleMedication(med)}
-                className={`p-4 rounded-xl text-left font-body text-sm transition-all active:scale-[0.98] ${
+                className={`p-4 rounded-xl text-left font-body text-sm transition-all active:scale-[0.98] min-h-[44px] ${
                   currentMedications.includes(med)
                     ? med === "None of the above"
                       ? "bg-primary-fixed/40 text-primary font-semibold"

@@ -10,11 +10,11 @@ interface ProtocolFocusProps {
 
 export default function ProtocolFocus({ metrics, warnings }: ProtocolFocusProps) {
   return (
-    <section className="bg-white rounded-xl p-8">
-      <h3 className="text-xl font-headline font-bold mb-6 text-on-surface">
+    <section className="bg-white rounded-xl p-5 sm:p-8">
+      <h3 className="text-lg sm:text-xl font-headline font-bold mb-5 sm:mb-6 text-on-surface">
         Protocol Focus
       </h3>
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {metrics.map((metric) => (
           <div key={metric.label} className="space-y-2">
             <div className="flex justify-between items-end">
@@ -37,7 +37,7 @@ export default function ProtocolFocus({ metrics, warnings }: ProtocolFocusProps)
         ))}
       </div>
       {warnings.length > 0 && (
-        <div className="mt-8 pt-8 border-t border-surface-container">
+        <div className="mt-6 pt-6 sm:mt-8 sm:pt-8 border-t border-surface-container">
           {warnings.map((warning, i) => (
             <div key={i} className="flex items-start gap-3 mb-3">
               <span className="material-symbols-outlined text-tertiary text-lg mt-0.5">

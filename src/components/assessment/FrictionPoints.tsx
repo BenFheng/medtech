@@ -62,7 +62,7 @@ export default function FrictionPoints() {
   const { frictionPoints, toggleFrictionPoint } = useAssessmentStore();
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-10 md:space-y-16">
       <div className="space-y-4 text-center md:text-left">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed/30 text-primary rounded-full">
           <span className="material-symbols-outlined text-[18px]">
@@ -72,30 +72,30 @@ export default function FrictionPoints() {
             Step 02 / 04
           </span>
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-extrabold text-on-background tracking-tight leading-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-headline font-extrabold text-on-background tracking-tight leading-tight">
           What friction points are holding you back?
         </h1>
-        <p className="text-on-surface-variant text-lg max-w-xl font-body">
+        <p className="text-on-surface-variant text-base md:text-lg max-w-xl font-body">
           Select all that apply. This helps us target specific cellular pathways
           in your protocol.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
         {frictionOptions.map((option) => {
           const isSelected = frictionPoints.includes(option.id);
           return (
             <button
               key={option.id}
               onClick={() => toggleFrictionPoint(option.id)}
-              className={`group flex items-start gap-4 p-6 rounded-xl transition-all duration-300 active:scale-[0.98] text-left ${
+              className={`group flex items-start gap-3 md:gap-4 p-4 md:p-6 rounded-xl transition-all duration-300 active:scale-[0.98] text-left min-h-[56px] ${
                 isSelected
                   ? "bg-primary-fixed/60"
                   : "bg-surface-container-lowest hover:bg-surface-container-high"
               }`}
             >
               <div
-                className={`w-10 h-10 shrink-0 rounded-lg flex items-center justify-center transition-colors ${
+                className={`w-11 h-11 shrink-0 rounded-lg flex items-center justify-center transition-colors ${
                   isSelected
                     ? "bg-primary text-on-primary"
                     : "bg-surface-container-high text-outline"
@@ -107,7 +107,7 @@ export default function FrictionPoints() {
               </div>
               <div className="flex-1">
                 <h3
-                  className={`font-headline font-bold text-lg ${
+                  className={`font-headline font-bold text-base md:text-lg ${
                     isSelected ? "text-primary" : "text-on-surface"
                   }`}
                 >

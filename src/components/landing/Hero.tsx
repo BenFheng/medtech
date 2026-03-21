@@ -3,23 +3,23 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section className="relative bg-surface-container-lowest overflow-hidden min-h-[870px] flex items-center">
-      <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 grid md:grid-cols-2 gap-10 md:gap-12 items-center relative z-10 w-full">
         <div className="max-w-2xl">
-          <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface leading-[1.1] mb-6">
+          <h1 className="font-headline text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface leading-[1.1] mb-5 sm:mb-6">
             Doctor-Formulated,<br />
             <span className="vitality-gradient-text">
               Data-Driven Performance Stacks.
             </span>
           </h1>
-          <p className="text-on-surface-variant text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+          <p className="text-on-surface-variant text-base sm:text-lg md:text-xl leading-relaxed mb-8 sm:mb-10 max-w-lg">
             We bridge the gap between clinical research and daily peak
             performance. Precision bio-optimization for those who demand more
             from their biology.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link
               href="/assessment"
-              className="vitality-gradient text-on-primary px-8 py-4 rounded-xl font-headline font-bold text-lg shadow-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 group"
+              className="vitality-gradient text-on-primary px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-headline font-bold text-base sm:text-lg shadow-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 group min-h-[44px]"
             >
               Start Your Assessment
               <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">
@@ -28,7 +28,7 @@ export default function Hero() {
             </Link>
             <Link
               href="#protocols"
-              className="bg-surface-container-high text-primary px-8 py-4 rounded-xl font-headline font-bold text-lg hover:bg-surface-container-highest transition-colors text-center"
+              className="bg-surface-container-high text-primary px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-headline font-bold text-base sm:text-lg hover:bg-surface-container-highest transition-colors text-center min-h-[44px] flex items-center justify-center"
             >
               Explore Protocols
             </Link>

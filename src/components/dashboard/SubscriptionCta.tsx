@@ -4,17 +4,17 @@ interface SubscriptionCtaProps {
 
 export default function SubscriptionCta({ totalPrice }: SubscriptionCtaProps) {
   return (
-    <section className="vitality-gradient rounded-xl p-8 text-white relative overflow-hidden">
+    <section className="vitality-gradient rounded-xl p-5 sm:p-8 text-white relative overflow-hidden">
       <div className="relative z-10">
-        <h3 className="text-2xl font-headline font-bold mb-2">
+        <h3 className="text-xl sm:text-2xl font-headline font-bold mb-2">
           Ready to ship?
         </h3>
-        <p className="text-on-primary-container text-sm mb-8">
+        <p className="text-on-primary-container text-sm mb-6 sm:mb-8">
           Confirm your custom stack and begin your clinical-grade journey.
         </p>
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <div className="flex items-baseline gap-1">
-            <span className="text-4xl font-black font-headline">
+            <span className="text-3xl sm:text-4xl font-black font-headline">
               ${totalPrice}
             </span>
             <span className="text-lg font-medium opacity-80">/mo</span>

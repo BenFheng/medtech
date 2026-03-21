@@ -17,7 +17,7 @@ export default function FocusSelector() {
   const { primaryFocus, setPrimaryFocus } = useAssessmentStore();
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-10 md:space-y-16">
       <div className="space-y-4 text-center md:text-left">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed/30 text-primary rounded-full">
           <span className="material-symbols-outlined text-[18px]">biotech</span>
@@ -25,31 +25,31 @@ export default function FocusSelector() {
             Step 01 / 04
           </span>
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-extrabold text-on-background tracking-tight leading-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-headline font-extrabold text-on-background tracking-tight leading-tight">
           What is your primary focus for your professional lifestyle?
         </h1>
-        <p className="text-on-surface-variant text-lg max-w-xl font-body">
+        <p className="text-on-surface-variant text-base md:text-lg max-w-xl font-body">
           Select the metabolic path that aligns most closely with your current
           performance objectives.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-3 md:gap-4">
         {focusOptions.map((option) => {
           const isSelected = primaryFocus === option.id;
           return (
             <button
               key={option.id}
               onClick={() => setPrimaryFocus(option.id)}
-              className={`group relative flex items-center justify-between p-6 rounded-full transition-all duration-300 active:scale-[0.98] ${
+              className={`group relative flex items-center justify-between p-4 md:p-6 rounded-full transition-all duration-300 active:scale-[0.98] min-h-[56px] ${
                 isSelected
                   ? "bg-primary-fixed shadow-sm"
                   : "bg-surface-container-lowest hover:bg-surface-container-high"
               }`}
             >
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4 md:gap-6">
                 <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
+                  className={`w-11 h-11 md:w-12 md:h-12 shrink-0 rounded-full flex items-center justify-center transition-colors ${
                     isSelected
                       ? "bg-primary text-on-primary"
                       : "bg-surface-container-high text-outline group-hover:bg-primary/10 group-hover:text-primary"
@@ -67,7 +67,7 @@ export default function FocusSelector() {
                   </span>
                 </div>
                 <span
-                  className={`text-xl md:text-2xl font-headline font-bold ${
+                  className={`text-base sm:text-xl md:text-2xl font-headline font-bold ${
                     isSelected
                       ? "text-primary"
                       : "text-on-surface-variant group-hover:text-on-background"

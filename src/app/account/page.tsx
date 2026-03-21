@@ -41,6 +41,7 @@ export default function AccountPage() {
   const [unitNumber, setUnitNumber] = useState("");
   const [postalError, setPostalError] = useState("");
   const [postalLoading, setPostalLoading] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   useEffect(() => {
     if (isLoaded && !user) {
@@ -106,10 +107,29 @@ export default function AccountPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-6 py-12">
+
+      {/* Toast notification */}
+      {saveMessage && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 md:bottom-auto md:top-20 md:left-auto md:translate-x-0 md:right-6 z-50 animate-[slideIn_0.3s_ease-out] w-[calc(100%-3rem)] md:w-auto">
+          <div
+            className={`flex items-center gap-3 rounded-xl px-5 py-3 shadow-lg font-headline font-semibold text-sm ${
+              saveMessage.type === "success"
+                ? "bg-primary text-on-primary"
+                : "bg-error text-on-error"
+            }`}
+          >
+            <span className="material-symbols-outlined text-lg">
+              {saveMessage.type === "success" ? "check_circle" : "error"}
+            </span>
+            {saveMessage.text}
+          </div>
+        </div>
+      )}
+
+      <main className="max-w-5xl mx-auto px-4 py-8 md:px-6 md:py-12">
         {/* Header */}
-        <header className="mb-12">
-          <h1 className="font-headline font-extrabold text-5xl tracking-tight text-on-surface mb-2">
+        <header className="mb-8 md:mb-12">
+          <h1 className="font-headline font-extrabold text-3xl md:text-5xl tracking-tight text-on-surface mb-2">
             Your Account
           </h1>
           <p className="text-lg text-on-surface-variant font-body">
@@ -118,12 +138,12 @@ export default function AccountPage() {
         </header>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-10 border-b border-outline-variant">
+        <div className="flex gap-2 mb-8 md:mb-10 border-b border-outline-variant overflow-x-auto scrollbar-hide">
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`flex items-center gap-2 px-5 py-3 font-headline font-semibold text-sm transition-colors border-b-2 -mb-px ${
+              className={`flex items-center gap-2 px-5 py-3 font-headline font-semibold text-sm transition-colors border-b-2 -mb-px shrink-0 ${
                 activeTab === tab.key
                   ? "text-primary border-primary"
                   : "text-on-surface-variant border-transparent hover:text-primary hover:border-primary/30"
@@ -135,10 +155,11 @@ export default function AccountPage() {
           ))}
         </div>
 
-        {/* Tab Content */}
+        {/* Tab Content — fixed height container */}
+        <div className="min-h-[600px]">
         {activeTab === "details" && (
-          <section className="max-w-2xl space-y-8">
-            <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-8 space-y-6">
+          <section className="bg-surface-container-lowest rounded-2xl border border-outline-variant">
+            <div className="p-5 md:p-8 space-y-6">
               <h2 className="font-headline font-bold text-xl text-on-surface">Personal Information</h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -181,19 +202,47 @@ export default function AccountPage() {
                 <label className="block text-sm font-headline font-semibold text-on-surface-variant mb-1.5">
                   Phone Number
                 </label>
-                <input
-                  type="tel"
-                  placeholder=""
-                  className="w-full rounded-xl border border-outline-variant bg-surface px-4 py-3 font-body text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40"
-                />
+                <div className="flex rounded-xl border border-outline-variant bg-surface overflow-hidden focus-within:ring-2 focus-within:ring-primary/40">
+                  <select
+                    defaultValue="+65"
+                    className="bg-surface-container border-r border-outline-variant px-3 py-3 font-body text-on-surface text-sm focus:outline-none cursor-pointer"
+                  >
+                    <option value="+65">🇸🇬 +65</option>
+                    <option value="+60">🇲🇾 +60</option>
+                    <option value="+62">🇮🇩 +62</option>
+                    <option value="+63">🇵🇭 +63</option>
+                    <option value="+66">🇹🇭 +66</option>
+                    <option value="+84">🇻🇳 +84</option>
+                    <option value="+91">🇮🇳 +91</option>
+                    <option value="+81">🇯🇵 +81</option>
+                    <option value="+82">🇰🇷 +82</option>
+                    <option value="+86">🇨🇳 +86</option>
+                    <option value="+61">🇦🇺 +61</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+1">🇺🇸 +1</option>
+                  </select>
+                  <input
+                    type="tel"
+                    inputMode="numeric"
+                    className="flex-1 px-4 py-3 font-body text-on-surface focus:outline-none bg-transparent"
+                  />
+                </div>
               </div>
 
-              <button className="vitality-gradient text-on-primary px-8 py-3 rounded-xl font-headline font-bold text-sm hover:opacity-90 transition-all">
+              <button
+                onClick={() => {
+                  setSaveMessage({ type: "success", text: "Personal information updated successfully." });
+                  setTimeout(() => setSaveMessage(null), 4000);
+                }}
+                className="vitality-gradient text-on-primary w-full md:w-auto px-8 py-3 rounded-xl font-headline font-bold text-sm hover:opacity-90 transition-all"
+              >
                 Save Changes
               </button>
             </div>
 
-            <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-8 space-y-6">
+            <hr className="border-outline-variant" />
+
+            <div className="p-5 md:p-8 space-y-6">
               <h2 className="font-headline font-bold text-xl text-on-surface">Shipping Address</h2>
 
               <div>
@@ -225,7 +274,7 @@ export default function AccountPage() {
                 )}
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-headline font-semibold text-on-surface-variant mb-1.5">
                     Block
@@ -275,8 +324,17 @@ export default function AccountPage() {
               </div>
 
               <button
-                type="submit"
-                className="vitality-gradient text-on-primary px-8 py-3 rounded-xl font-headline font-bold text-sm hover:opacity-90 transition-all"
+                type="button"
+                onClick={() => {
+                  if (postalCode.length !== 6 || postalError) {
+                    setSaveMessage({ type: "error", text: "Please enter a valid 6-digit postal code." });
+                    setTimeout(() => setSaveMessage(null), 4000);
+                    return;
+                  }
+                  setSaveMessage({ type: "success", text: "Shipping address updated successfully." });
+                  setTimeout(() => setSaveMessage(null), 4000);
+                }}
+                className="vitality-gradient text-on-primary w-full md:w-auto px-8 py-3 rounded-xl font-headline font-bold text-sm hover:opacity-90 transition-all"
               >
                 Update Address
               </button>
@@ -285,8 +343,9 @@ export default function AccountPage() {
         )}
 
         {activeTab === "purchases" && (
-          <section>
-            <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+          <section className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+            {/* Desktop table — hidden on mobile */}
+            <div className="hidden md:block">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-outline-variant bg-surface-container">
@@ -315,6 +374,25 @@ export default function AccountPage() {
               </table>
             </div>
 
+            {/* Mobile cards — hidden on desktop */}
+            <div className="flex flex-col gap-4 md:hidden p-5">
+              {mockPurchases.map((order) => (
+                <div key={order.id} className="rounded-xl border border-outline-variant p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-body text-sm text-primary font-semibold">{order.id}</span>
+                    <span className="inline-block rounded-full bg-primary-fixed px-3 py-1 text-xs font-headline font-bold text-on-primary-fixed">
+                      {order.status}
+                    </span>
+                  </div>
+                  <p className="font-body text-sm text-on-surface">{order.stack}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-body text-sm text-on-surface-variant">{order.date}</span>
+                    <span className="font-body text-sm text-on-surface font-semibold">${order.amount}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             {mockPurchases.length === 0 && (
               <div className="text-center py-16">
                 <span className="material-symbols-outlined text-5xl text-on-surface-variant mb-4">shopping_bag</span>
@@ -325,18 +403,18 @@ export default function AccountPage() {
         )}
 
         {activeTab === "notes" && (
-          <section className="space-y-6 max-w-3xl">
+          <section className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-5 md:p-8 space-y-6 overflow-hidden">
             {mockNotes.map((note) => (
               <div
                 key={note.id}
-                className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-8"
+                className="rounded-xl border border-outline-variant p-5 md:p-6"
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="material-symbols-outlined text-primary text-2xl">stethoscope</span>
                     <span className="font-headline font-bold text-on-surface">{note.doctor}</span>
                   </div>
-                  <span className="text-sm text-on-surface-variant font-body">{note.date}</span>
+                  <span className="text-sm text-on-surface-variant font-body pl-9 sm:pl-0">{note.date}</span>
                 </div>
                 <p className="font-body text-on-surface-variant leading-relaxed">{note.summary}</p>
               </div>
@@ -351,8 +429,10 @@ export default function AccountPage() {
           </section>
         )}
 
+        </div>
+
         {/* Logout */}
-        <div className="mt-16 pt-8 border-t border-outline-variant">
+        <div className="mt-10 md:mt-16 pt-8 border-t border-outline-variant">
           <button
             onClick={() => signOut({ redirectUrl: "/" })}
             className="flex items-center gap-2 rounded-xl border border-error px-6 py-3 font-headline font-bold text-sm text-error hover:bg-error hover:text-on-error transition-colors"

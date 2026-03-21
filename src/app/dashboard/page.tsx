@@ -54,13 +54,13 @@ export default function DashboardPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Welcome Header */}
-        <header className="mb-16">
-          <h1 className="font-headline font-extrabold text-5xl tracking-tight text-on-surface mb-4">
+        <header className="mb-10 sm:mb-16">
+          <h1 className="font-headline font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-on-surface mb-3 sm:mb-4">
             Welcome back, {user?.firstName || "there"}.
           </h1>
-          <p className="text-xl text-on-surface-variant max-w-2xl font-body leading-relaxed">
+          <p className="text-base sm:text-xl text-on-surface-variant max-w-2xl font-body leading-relaxed">
             Your cellular analysis is complete. We&apos;ve generated an optimized
             protocol based on your assessment, targeting your primary focus areas
             with clinically validated compounds.

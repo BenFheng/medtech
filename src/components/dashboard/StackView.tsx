@@ -23,7 +23,7 @@ function SupplementCard({ supplement, scheduleLabel }: { supplement: Supplement;
   const isAM = scheduleLabel === "AM";
 
   return (
-    <div className="bg-surface-container-low p-6 rounded-lg transition-all hover:bg-surface-container hover:translate-y-[-2px]">
+    <div className="bg-surface-container-low p-4 sm:p-6 rounded-lg transition-all hover:bg-surface-container hover:translate-y-[-2px]">
       <div className="flex items-start justify-between mb-4">
         <div className={`p-3 rounded-xl ${isAM ? "bg-secondary-fixed" : "bg-primary-fixed"} text-primary`}>
           <span
@@ -37,7 +37,7 @@ function SupplementCard({ supplement, scheduleLabel }: { supplement: Supplement;
           {scheduleLabel} Schedule
         </span>
       </div>
-      <h3 className="text-lg font-headline font-bold text-on-surface mb-1">
+      <h3 className="text-base sm:text-lg font-headline font-bold text-on-surface mb-1">
         {supplement.name}
       </h3>
       <p className="text-sm text-on-surface-variant font-body mb-4">
@@ -61,19 +61,19 @@ export default function StackView({ stackName, version, am, pm }: StackViewProps
   ];
 
   return (
-    <section className="bg-surface-container-lowest rounded-xl p-8">
-      <div className="flex justify-between items-end mb-10">
+    <section className="bg-surface-container-lowest rounded-xl p-5 sm:p-8">
+      <div className="flex justify-between items-end mb-7 sm:mb-10 gap-4">
         <div>
           <span className="text-xs font-bold tracking-widest text-primary uppercase font-body">
             Current Configuration
           </span>
-          <h2 className="text-3xl font-headline font-bold text-on-surface mt-1">
+          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-on-surface mt-1">
             {stackName} {version}
           </h2>
         </div>
-        <div className="flex items-center gap-2 text-primary font-semibold">
+        <div className="flex items-center gap-2 text-primary font-semibold shrink-0">
           <span className="material-symbols-outlined">verified_user</span>
-          <span className="text-sm">Clinical Grade</span>
+          <span className="text-sm hidden sm:inline">Clinical Grade</span>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
