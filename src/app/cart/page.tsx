@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useCartStore } from "@/stores/cart";
+import { useCartStore, type CartItem } from "@/stores/cart";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -55,7 +55,7 @@ function DurationDropdown({ value, onChange }: { value: string; onChange: (label
   );
 }
 
-function CartItemRow({ item, hideDropdownLabel, useNativeSelect }: { item: ReturnType<typeof useCartStore>["items"][0]; hideDropdownLabel?: boolean; useNativeSelect?: boolean }) {
+function CartItemRow({ item, hideDropdownLabel, useNativeSelect }: { item: CartItem; hideDropdownLabel?: boolean; useNativeSelect?: boolean }) {
   const { removeItem, updateDuration } = useCartStore();
   const price = (item.pricePerMonth * item.durationMultiplier).toFixed(2);
   const displayPrice = parseFloat(price) % 1 === 0 ? parseInt(price).toString() : price;
