@@ -71,8 +71,8 @@ export default function AssessmentPage() {
       <Navbar />
       <StepIndicator currentStep={currentStep} totalSteps={TOTAL_STEPS} />
 
-      <main className="min-h-[calc(100vh-72px)] flex flex-col items-center justify-center px-6 py-12">
-        <div className="w-full max-w-3xl space-y-16">
+      <main className="min-h-[calc(100vh-72px)] flex flex-col items-center justify-center px-4 sm:px-8 py-12" style={{maxWidth: '1024px', width: '100%', marginLeft: 'auto', marginRight: 'auto'}}>
+        <div className="w-full space-y-16">
           {renderStep()}
 
           {/* Navigation */}

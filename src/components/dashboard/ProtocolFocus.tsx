@@ -10,7 +10,7 @@ interface ProtocolFocusProps {
 
 export default function ProtocolFocus({ metrics, warnings }: ProtocolFocusProps) {
   return (
-    <section className="bg-white rounded-xl p-8">
+    <section className="bg-white rounded-xl p-4">
       <h3 className="text-xl font-headline font-bold mb-6 text-on-surface">
         Protocol Focus
       </h3>

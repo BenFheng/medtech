@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function CtaSection() {
   return (
-    <section className="py-24 px-6 bg-surface-container-lowest">
-      <div className="max-w-5xl mx-auto text-center bg-surface-container rounded-[2rem] p-12 md:p-20 relative overflow-hidden">
+    <section className="py-24 bg-surface-container-lowest">
+      <div className="max-w-screen-lg mx-auto px-4 sm:px-8 text-center bg-surface-container rounded-[2rem] p-12 md:p-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary-fixed/30 blur-[100px] rounded-full" />
         <div className="relative z-10">
           <h2 className="font-headline text-4xl md:text-5xl font-extrabold text-on-surface mb-8 tracking-tighter">

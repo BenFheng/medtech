@@ -5,13 +5,17 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { useAssessmentStore } from "@/stores/assessment";
 import { generateRecommendation } from "@/lib/recommend";
-import type { RecommendedStack } from "@/lib/types";
+import { swapCompound, recalculatePrice } from "@/lib/stack";
+import type { RecommendedStack, Supplement } from "@/lib/types";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import DashboardTabs from "@/components/dashboard/DashboardTabs";
 import StackView from "@/components/dashboard/StackView";
 import ProtocolFocus from "@/components/dashboard/ProtocolFocus";
 import SubscriptionCta from "@/components/dashboard/SubscriptionCta";
-import BiomarkerStatus from "@/components/dashboard/BiomarkerStatus";
+import ProtocolInsights from "@/components/dashboard/ProtocolInsights";
+import BiomarkerTracking from "@/components/dashboard/BiomarkerTracking";
+import OrderSubscription from "@/components/dashboard/OrderSubscription";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -19,6 +23,7 @@ export default function DashboardPage() {
   const { isComplete, primaryFocus, frictionPoints, currentSupplements, currentMedications } =
     useAssessmentStore();
   const [stack, setStack] = useState<RecommendedStack | null>(null);
+  const [activeTab, setActiveTab] = useState("stack");
 
   useEffect(() => {
     if (!isComplete || !primaryFocus) {
@@ -33,7 +38,58 @@ export default function DashboardPage() {
       currentMedications,
     });
     setStack(recommendation);
-  }, [isComplete, primaryFocus, frictionPoints, currentSupplements, currentMedications, router]);
+
+    // Persist assessment results to Supabase
+    if (user?.id) {
+      const allSupps = [...recommendation.am, ...recommendation.pm];
+      fetch("/api/protocols/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user.id,
+          protocolName: recommendation.stackName,
+          primaryFocus,
+          frictionPoints,
+          assessmentAnswers: {
+            currentSupplements,
+            currentMedications,
+          },
+          recommendedStack: allSupps.map((s) => s.id),
+          totalPrice: recommendation.totalPrice,
+        }),
+      }).catch(() => {
+        // Silently fail — Supabase may not be configured yet
+      });
+    }
+  }, [isComplete, primaryFocus, frictionPoints, currentSupplements, currentMedications, router, user?.id]);
+
+  const handleAdd = (supplement: Supplement) => {
+    if (!stack) return;
+    if (supplement.schedule === "AM" || supplement.schedule === "AM/PM") {
+      setStack({ ...stack, am: [...stack.am, supplement] });
+    } else {
+      setStack({ ...stack, pm: [...stack.pm, supplement] });
+    }
+  };
+
+  const handleRemove = (removeId: string) => {
+    if (!stack) return;
+    const newAm = stack.am.filter((s) => s.id !== removeId);
+    const newPm = stack.pm.filter((s) => s.id !== removeId);
+    const allNew = [...newAm, ...newPm.filter((p) => !newAm.some((a) => a.id === p.id))];
+    const totalPrice = recalculatePrice(allNew);
+    setStack({ ...stack, am: newAm, pm: newPm, totalPrice: Math.max(totalPrice, 0) });
+  };
+
+  const handleSwap = (removeId: string, newSupplement: Supplement) => {
+    if (!stack) return;
+    const allSupps = [...stack.am, ...stack.pm.filter((p) => !stack.am.some((a) => a.id === p.id))];
+    const { stack: newStack } = swapCompound(allSupps, removeId, newSupplement);
+    const am = newStack.filter((s) => s.schedule === "AM" || s.schedule === "AM/PM");
+    const pm = newStack.filter((s) => s.schedule === "PM" || s.schedule === "AM/PM");
+    const totalPrice = recalculatePrice(newStack);
+    setStack({ ...stack, am, pm, totalPrice: Math.max(totalPrice, 149) });
+  };
 
   if (!stack) {
     return (
@@ -51,42 +107,59 @@ export default function DashboardPage() {
     );
   }
 
+  const allSupps = [...stack.am, ...stack.pm.filter((p) => !stack.am.some((a) => a.id === p.id))];
+
   return (
     <>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      <main className="mx-auto px-4 sm:px-8 py-12" style={{maxWidth: '1024px', width: '100%'}}>
         {/* Welcome Header */}
-        <header className="mb-16">
+        <header className="mb-10">
           <h1 className="font-headline font-extrabold text-5xl tracking-tight text-on-surface mb-4">
             Welcome back, {user?.firstName || "there"}.
           </h1>
           <p className="text-xl text-on-surface-variant max-w-2xl font-body leading-relaxed">
             Your cellular analysis is complete. We&apos;ve generated an optimized
-            protocol based on your assessment, targeting your primary focus areas
-            with clinically validated compounds.
+            protocol based on your assessment.
           </p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Left Column: Stack & Data */}
-          <div className="lg:col-span-8 space-y-8">
-            <StackView
-              stackName={stack.stackName}
-              version={stack.version}
-              am={stack.am}
-              pm={stack.pm}
-            />
-            <BiomarkerStatus />
-          </div>
+        <DashboardTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
-          {/* Right Column: Focus & CTA */}
-          <div className="lg:col-span-4 space-y-8">
-            <ProtocolFocus
+        <div style={{width: '100%', overflow: 'hidden'}}>
+          {activeTab === "stack" && (
+            <div className="space-y-8">
+              <StackView
+                stackName={stack.stackName}
+                version={stack.version}
+                am={stack.am}
+                pm={stack.pm}
+                onSwap={handleSwap}
+                onRemove={handleRemove}
+                onAdd={handleAdd}
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <ProtocolFocus metrics={stack.focusMetrics} warnings={stack.warnings} />
+                <SubscriptionCta totalPrice={stack.totalPrice} stack={allSupps} />
+              </div>
+            </div>
+          )}
+
+          {activeTab === "insights" && (
+            <ProtocolInsights
+              stack={allSupps}
+              frictionPoints={frictionPoints}
               metrics={stack.focusMetrics}
-              warnings={stack.warnings}
             />
-            <SubscriptionCta totalPrice={stack.totalPrice} />
-          </div>
+          )}
+
+          {activeTab === "biomarkers" && (
+            <BiomarkerTracking />
+          )}
+
+          {activeTab === "orders" && (
+            <OrderSubscription stack={allSupps} totalPrice={stack.totalPrice} />
+          )}
         </div>
       </main>
       <Footer />

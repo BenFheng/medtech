@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section className="relative bg-surface-container-lowest overflow-hidden min-h-[870px] flex items-center">
-      <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-screen-lg mx-auto px-4 sm:px-8 py-20 grid md:grid-cols-2 gap-12 items-center relative z-10">
         <div className="max-w-2xl">
           <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface leading-[1.1] mb-6">
             Doctor-Formulated,{" "}

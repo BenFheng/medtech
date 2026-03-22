@@ -19,6 +19,20 @@ export const metadata: Metadata = {
   title: "Vanguard | Cellular Optimization Defined",
   description:
     "Doctor-formulated, data-driven supplement stacks for high-performing professionals. Clinical-grade precision meets algorithmic optimization.",
+  openGraph: {
+    title: "Vanguard | Cellular Optimization Defined",
+    description:
+      "Doctor-formulated, data-driven supplement stacks for high-performing professionals.",
+    siteName: "Vanguard Health Sciences",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vanguard | Cellular Optimization Defined",
+    description:
+      "Doctor-formulated, data-driven supplement stacks for high-performing professionals.",
+  },
 };
 
 export default function RootLayout({

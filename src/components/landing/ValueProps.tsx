@@ -2,8 +2,8 @@ export default function ValueProps() {
   return (
     <>
       {/* The Unfair Advantage Section */}
-      <section className="bg-surface py-24 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-surface py-24">
+        <div className="max-w-screen-lg mx-auto px-4 sm:px-8">
           <div className="text-center mb-16">
             <h2 className="font-headline text-4xl font-bold tracking-tight text-on-surface mb-4">
               The Unfair Advantage
@@ -76,8 +76,8 @@ export default function ValueProps() {
       </section>
 
       {/* Core Values Section */}
-      <section className="bg-surface-container-low py-24 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-surface-container-low py-24">
+        <div className="max-w-screen-lg mx-auto px-4 sm:px-8">
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="bg-surface-container-lowest p-8 rounded-xl">
               <span className="material-symbols-outlined text-primary text-4xl mb-6 block">
