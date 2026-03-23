@@ -163,16 +163,16 @@ export default function StackView({ stackName, version, am, pm, onSwap, onRemove
   return (
     <div className="space-y-8 overflow-hidden">
       <section className="bg-surface-container-lowest rounded-xl p-4">
-        <div className="flex justify-between items-end">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
         <div>
           <span className="text-xs font-bold tracking-widest text-primary uppercase font-body">
             Current Configuration
           </span>
-          <h2 className="text-2xl font-headline font-bold text-on-surface mt-1">
+          <h2 className="text-xl sm:text-2xl font-headline font-bold text-on-surface mt-1">
             {stackName} {version}
           </h2>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="flex bg-surface-container rounded-lg p-1">
             <button
               onClick={() => setViewMode("grid")}
@@ -225,6 +225,7 @@ export default function StackView({ stackName, version, am, pm, onSwap, onRemove
                     !am.some((a) => a.id === s.id) &&
                     !pm.some((p) => p.id === s.id)
                   )
+                  .sort((a, b) => a.name.localeCompare(b.name))
                   .map((s) => (
                     <button
                       key={s.id}

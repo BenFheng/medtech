@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCartStore } from "@/stores/cart";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ProductJsonLd } from "@/components/seo/JsonLd";
@@ -53,6 +55,8 @@ const stacks = [
 ];
 
 function StackCard({ stack }: { stack: typeof stacks[number] }) {
+  const router = useRouter();
+  const { addItem } = useCartStore();
   const [duration, setDuration] = useState("1 Month");
   const multiplier = durationOptions.find((d) => d.label === duration)?.multiplier || 1;
 
@@ -133,18 +137,48 @@ function StackCard({ stack }: { stack: typeof stacks[number] }) {
           })}
         </div>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href="/checkout"
+          <button
+            onClick={() => {
+              stackSupps.forEach((supp) => {
+                addItem({
+                  productId: supp.id,
+                  name: supp.name,
+                  pricePerMonth: supp.pricePerMonth,
+                  duration: "Monthly Subscription",
+                  durationMultiplier: multiplier,
+                  dosageAmount: supp.dosage.amount,
+                  dosageUnit: supp.dosage.unit,
+                  timingSchedule: supp.schedule,
+                  isProtocol: true,
+                });
+              });
+              router.push("/checkout");
+            }}
             className="flex-1 vitality-gradient text-on-primary font-headline font-bold py-4 rounded-lg text-center transition-all active:scale-95"
           >
             Subscribe to This Stack
-          </Link>
-          <Link
-            href="/assessment"
+          </button>
+          <button
+            onClick={() => {
+              stackSupps.forEach((supp) => {
+                addItem({
+                  productId: supp.id,
+                  name: supp.name,
+                  pricePerMonth: supp.pricePerMonth,
+                  duration,
+                  durationMultiplier: multiplier,
+                  dosageAmount: supp.dosage.amount,
+                  dosageUnit: supp.dosage.unit,
+                  timingSchedule: supp.schedule,
+                  isProtocol: true,
+                });
+              });
+              router.push("/cart");
+            }}
             className="flex-1 bg-surface-container text-on-surface font-headline font-bold py-4 rounded-lg text-center hover:bg-surface-container-high transition-all"
           >
             Customize This Stack
-          </Link>
+          </button>
         </div>
       </div>
     </div>

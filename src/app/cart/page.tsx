@@ -29,7 +29,7 @@ function DurationDropdown({ value, onChange }: { value: string; onChange: (label
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between gap-2 rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm font-body text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 min-w-[110px]"
+        className="flex items-center justify-between gap-1 rounded-lg border border-outline-variant bg-surface px-2 sm:px-3 py-2 text-xs sm:text-sm font-body text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40"
       >
         {value}
         <span className={`material-symbols-outlined text-lg text-on-surface-variant transition-transform ${open ? "rotate-180" : ""}`}>expand_more</span>
@@ -120,28 +120,30 @@ export default function CartPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-screen-lg mx-auto px-4 sm:px-8 py-24">
+      <main className="mx-auto px-4 sm:px-8 py-12" style={{maxWidth: '1024px', width: '100%'}}>
         <h1 className="font-headline font-extrabold text-4xl text-on-surface mb-10">Your Stack</h1>
 
         {items.length === 0 ? (
-          <div className="text-center py-20">
-            <span className="material-symbols-outlined text-5xl text-on-surface-variant mb-4">local_mall</span>
-            <p className="font-headline font-semibold text-on-surface-variant">Your stack is empty.</p>
-            <Link href="/shop" className="inline-block mt-6 vitality-gradient text-on-primary px-8 py-3 rounded-xl font-headline font-bold text-sm hover:opacity-90 transition-all">
-              Browse Supplements
-            </Link>
+          <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant p-6">
+            <div className="flex flex-col items-center justify-center py-6 text-center">
+              <span className="material-symbols-outlined text-3xl text-on-surface-variant mb-2">local_mall</span>
+              <p className="font-headline font-semibold text-sm text-on-surface-variant mb-4">Your stack is empty.</p>
+              <Link href="/shop" className="vitality-gradient text-on-primary px-6 py-2.5 rounded-lg font-headline font-bold text-sm hover:opacity-90 transition-all">
+                Browse Supplements
+              </Link>
+            </div>
           </div>
         ) : (
           <>
             {/* Protocol Section */}
             {protocolItems.length > 0 && (
               <div className="mb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary">science</span>
-                    <h2 className="font-headline font-bold text-xl text-on-surface">Your Protocol</h2>
+                <div className="flex items-center justify-between mb-4 gap-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="material-symbols-outlined text-primary flex-shrink-0">science</span>
+                    <h2 className="font-headline font-bold text-lg sm:text-xl text-on-surface whitespace-nowrap">Your Protocol</h2>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 flex-shrink-0">
                     <DurationDropdown
                       value={protocolItems[0]?.duration || "Monthly Subscription"}
                       onChange={(label, multiplier) => {
@@ -210,7 +212,7 @@ export default function CartPage() {
                   Proceed to Checkout
                 </Link>
                 <button
-                  onClick={clearCart}
+                  onClick={() => { clearCart(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="flex-1 bg-surface-container text-on-surface font-headline font-bold py-4 rounded-lg text-center hover:bg-surface-container-high transition-all"
                 >
                   Clear Stack
