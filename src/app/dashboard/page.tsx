@@ -174,6 +174,7 @@ export default function DashboardPage() {
                   const protocolPm = activeProtocol.supplements.filter((s) => s.schedule === "PM" || s.schedule === "AM/PM");
                   return (
                     <StackView
+                      key={activeProtocol.id}
                       stackName={activeProtocol.name}
                       version=""
                       am={protocolAm}
@@ -187,6 +188,7 @@ export default function DashboardPage() {
                 })()
               ) : (
               <StackView
+                key="assessment"
                 stackName={stack.stackName}
                 version={stack.version}
                 am={stack.am}
@@ -198,7 +200,34 @@ export default function DashboardPage() {
               />
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <ProtocolFocus metrics={stack.focusMetrics} warnings={stack.warnings} />
+                {(() => {
+                  const activeProto = activeProtocolId ? protocols.find((p) => p.id === activeProtocolId) : null;
+                  if (activeProto) {
+                    // Derive focus metrics from protocol supplements
+                    const cats = activeProto.supplements.map((s) => s.category);
+                    const catCounts: Record<string, number> = {};
+                    cats.forEach((c) => { catCounts[c] = (catCounts[c] || 0) + 1; });
+                    const total = cats.length || 1;
+                    const iconMap: Record<string, string> = {
+                      cognitive: "psychology", "sleep-stress": "bedtime", longevity: "bolt",
+                      "skin-radiance": "face_5", foundation: "shield", performance: "fitness_center",
+                    };
+                    const labelMap: Record<string, string> = {
+                      cognitive: "Cognitive Performance", "sleep-stress": "Sleep & Stress",
+                      longevity: "Longevity", "skin-radiance": "Skin Radiance",
+                      foundation: "Foundation Health", performance: "Physical Performance",
+                    };
+                    const metrics = Object.entries(catCounts)
+                      .sort(([, a], [, b]) => b - a)
+                      .slice(0, 3)
+                      .map(([cat, count]) => ({
+                        label: labelMap[cat] || cat, value: Math.round((count / total) * 100),
+                        icon: iconMap[cat] || "science",
+                      }));
+                    return <ProtocolFocus metrics={metrics} warnings={[]} />;
+                  }
+                  return <ProtocolFocus metrics={stack.focusMetrics} warnings={stack.warnings} />;
+                })()}
                 {(() => {
                   const activeProto = activeProtocolId ? protocols.find((p) => p.id === activeProtocolId) : null;
                   const ctaStack = activeProto ? activeProto.supplements : allSupps;
