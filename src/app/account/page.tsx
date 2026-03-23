@@ -9,9 +9,38 @@ import Footer from "@/components/layout/Footer";
 type Tab = "details" | "purchases" | "notes";
 
 const mockPurchases = [
-  { id: "ORD-2024-001", date: "2026-03-01", stack: "The Longevity Stack v2.4", amount: 189, status: "Delivered" },
-  { id: "ORD-2024-002", date: "2026-02-01", stack: "The Longevity Stack v2.3", amount: 189, status: "Delivered" },
-  { id: "ORD-2024-003", date: "2026-01-01", stack: "The Cognitive Stack v1.8", amount: 169, status: "Delivered" },
+  { id: "ORD-2024-001", date: "2026-03-01", stack: "The Longevity Stack v2.4", amount: 189, status: "Delivered",
+    items: [
+      { name: "NMN", dosage: "500mg", price: 28 },
+      { name: "Trans-Resveratrol", dosage: "500mg", price: 22 },
+      { name: "CoQ10 Ubiquinol", dosage: "200mg", price: 24 },
+      { name: "PQQ", dosage: "20mg", price: 18 },
+      { name: "Astaxanthin", dosage: "12mg", price: 16 },
+      { name: "Omega-3 EPA/DHA", dosage: "2000mg", price: 18 },
+      { name: "Vitamin D3", dosage: "5000IU", price: 6 },
+      { name: "Vitamin K2 MK-7", dosage: "200mcg", price: 10 },
+    ]},
+  { id: "ORD-2024-002", date: "2026-02-01", stack: "The Longevity Stack v2.3", amount: 189, status: "Delivered",
+    items: [
+      { name: "NMN", dosage: "500mg", price: 28 },
+      { name: "Trans-Resveratrol", dosage: "500mg", price: 22 },
+      { name: "CoQ10 Ubiquinol", dosage: "200mg", price: 24 },
+      { name: "PQQ", dosage: "20mg", price: 18 },
+      { name: "Astaxanthin", dosage: "12mg", price: 16 },
+      { name: "Omega-3 EPA/DHA", dosage: "2000mg", price: 18 },
+      { name: "Vitamin D3", dosage: "5000IU", price: 6 },
+      { name: "Vitamin K2 MK-7", dosage: "200mcg", price: 10 },
+    ]},
+  { id: "ORD-2024-003", date: "2026-01-01", stack: "The Cognitive Stack v1.8", amount: 169, status: "Delivered",
+    items: [
+      { name: "L-Theanine", dosage: "200mg", price: 8 },
+      { name: "Alpha-GPC", dosage: "300mg", price: 16 },
+      { name: "Lion's Mane", dosage: "1000mg", price: 22 },
+      { name: "Bacopa Monnieri", dosage: "300mg", price: 12 },
+      { name: "Phosphatidylserine", dosage: "100mg", price: 14 },
+      { name: "Omega-3 EPA/DHA", dosage: "2000mg", price: 18 },
+      { name: "Creatine Monohydrate", dosage: "5g", price: 8 },
+    ]},
 ];
 
 const mockNotes = [
@@ -34,6 +63,7 @@ export default function AccountPage() {
   const { signOut } = useClerk();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<Tab>("details");
+  const [selectedOrder, setSelectedOrder] = useState<typeof mockPurchases[0] | null>(null);
   const [accountSubTab, setAccountSubTab] = useState<"personal" | "security">("personal");
   const [postalCode, setPostalCode] = useState("");
   const [block, setBlock] = useState("");
@@ -136,12 +166,16 @@ export default function AccountPage() {
   const handleUpdatePassword = async () => {
     if (!user) return;
     setPasswordError("");
+    if (user.passwordEnabled && !currentPassword) {
+      setPasswordError("Please enter your current password.");
+      return;
+    }
     if (newPassword.length < 8) {
       setPasswordError("Password must be at least 8 characters.");
       return;
     }
     if (newPassword !== confirmPassword) {
-      setPasswordError("Passwords do not match.");
+      setPasswordError("New password and confirm password do not match.");
       return;
     }
     setPasswordSaving(true);
@@ -305,8 +339,44 @@ export default function AccountPage() {
 
   return (
     <>
+      {/* Order Detail Modal */}
+      {selectedOrder && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setSelectedOrder(null)}>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-headline font-bold text-xl text-on-surface">{selectedOrder.id}</h2>
+              <button onClick={() => setSelectedOrder(null)} className="text-on-surface-variant hover:text-on-surface">
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div className="flex items-center justify-between mb-4 text-sm text-on-surface-variant">
+              <span>{selectedOrder.date}</span>
+              <span className="inline-block rounded-full bg-primary-fixed px-3 py-1 text-xs font-headline font-bold text-on-primary-fixed">
+                {selectedOrder.status}
+              </span>
+            </div>
+            <p className="text-sm font-headline font-bold text-on-surface mb-4">{selectedOrder.stack}</p>
+            <div className="space-y-3 mb-4">
+              {selectedOrder.items.map((item) => (
+                <div key={item.name} className="flex items-center justify-between py-2 border-b border-surface-container last:border-0">
+                  <div>
+                    <p className="text-sm font-bold text-on-surface">{item.name}</p>
+                    <p className="text-xs text-on-surface-variant">{item.dosage}</p>
+                  </div>
+                  <span className="text-sm font-bold text-on-surface">${item.price}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-between pt-3 border-t-2 border-primary/20">
+              <span className="font-headline font-bold text-on-surface">Total</span>
+              <span className="font-headline font-bold text-primary text-lg">${selectedOrder.amount}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Navbar />
-      <main className="max-w-screen-lg mx-auto px-4 sm:px-8 py-12">
+      <main className="mx-auto px-4 sm:px-8 py-12" style={{maxWidth: '1024px', width: '100%'}}>
         {/* Header */}
         <header className="mb-12">
           <h1 className="font-headline font-extrabold text-5xl tracking-tight text-on-surface mb-2">
@@ -527,7 +597,7 @@ export default function AccountPage() {
                         Password
                       </label>
                       <p className="text-xs text-on-surface-variant">
-                        {user.passwordEnabled ? "Change your password below." : "Set a password to enable email & password sign-in."}
+                        {!user.passwordEnabled && "Set a password to enable email & password sign-in."}
                       </p>
 
                       {user.passwordEnabled && (
@@ -714,7 +784,7 @@ export default function AccountPage() {
                 <tbody>
                   {mockPurchases.map((order) => (
                     <tr key={order.id} className="border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
-                      <td className="px-6 py-4 font-body text-sm text-primary font-semibold">{order.id}</td>
+                      <td className="px-6 py-4 font-body text-sm text-primary font-semibold cursor-pointer hover:underline" onClick={() => setSelectedOrder(order)}>{order.id}</td>
                       <td className="px-6 py-4 font-body text-sm text-on-surface-variant">{order.date}</td>
                       <td className="px-6 py-4 font-body text-sm text-on-surface">{order.stack}</td>
                       <td className="px-6 py-4 font-body text-sm text-on-surface font-semibold">${order.amount}</td>

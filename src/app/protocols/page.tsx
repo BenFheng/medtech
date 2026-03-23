@@ -119,28 +119,30 @@ function StackCard({ stack }: { stack: typeof stacks[number] }) {
             const displaySuppPrice = parseFloat(suppPrice) % 1 === 0 ? parseInt(suppPrice).toString() : suppPrice;
             const isAM = supp.schedule === "AM" || supp.schedule === "AM/PM";
             return (
-              <Link key={supp.id} href={`/shop/${supp.id}`} className="bg-surface-container-low rounded-lg p-4 hover:bg-surface-container transition-colors">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`material-symbols-outlined text-sm ${isAM ? "text-amber-500" : "text-indigo-400"}`} style={{ fontVariationSettings: "'FILL' 1" }}>
-                    {isAM ? "light_mode" : "dark_mode"}
-                  </span>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                    supp.evidence.level === "A"
-                      ? "bg-emerald-100 text-emerald-700"
-                      : supp.evidence.level === "B"
-                      ? "bg-amber-100 text-amber-700"
-                      : "bg-slate-100 text-slate-500"
-                  }`}>
-                    {supp.evidence.level === "A" ? "Strong" : supp.evidence.level === "B" ? "Moderate" : "Emerging"}
-                  </span>
-                </div>
+              <Link key={supp.id} href={`/shop/${supp.id}`} className="bg-surface-container-low rounded-lg p-4 hover:bg-surface-container transition-colors flex flex-col">
                 <h4 className="font-headline font-bold text-sm text-on-surface">
                   {supp.name}
                 </h4>
                 <p className="text-xs text-on-surface-variant mt-1">
                   {supp.dosage.amount}{supp.dosage.unit}
                 </p>
-                <span className="text-[10px] text-on-surface-variant mt-2 block">${displaySuppPrice}</span>
+                <div className="flex items-center justify-between mt-auto pt-2">
+                  <div className="flex items-center gap-1.5">
+                    <span className={`material-symbols-outlined text-sm ${isAM ? "text-amber-500" : "text-indigo-400"}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+                      {isAM ? "light_mode" : "dark_mode"}
+                    </span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      supp.evidence.level === "A"
+                        ? "bg-emerald-100 text-emerald-700"
+                        : supp.evidence.level === "B"
+                        ? "bg-amber-100 text-amber-700"
+                        : "bg-slate-100 text-slate-500"
+                    }`}>
+                      {supp.evidence.level === "A" ? "Strong" : supp.evidence.level === "B" ? "Moderate" : "Emerging"}
+                    </span>
+                  </div>
+                  <span className="text-xs text-on-surface-variant">${displaySuppPrice}</span>
+                </div>
               </Link>
             );
           })}
