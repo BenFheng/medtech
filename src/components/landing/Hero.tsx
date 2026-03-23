@@ -27,7 +27,7 @@ export default function Hero() {
               </span>
             </Link>
             <Link
-              href="#protocols"
+              href="/protocols"
               className="bg-surface-container-high text-primary px-8 py-4 rounded-xl font-headline font-bold text-lg hover:bg-surface-container-highest transition-colors text-center"
             >
               Explore Protocols

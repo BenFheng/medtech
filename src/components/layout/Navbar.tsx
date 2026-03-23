@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Show, SignInButton, SignUpButton, useUser } from '@clerk/nextjs';
 import { useCartStore } from '@/stores/cart';
 
@@ -23,8 +24,9 @@ const benefitCategories = [
 export default function Navbar() {
   const { user } = useUser();
   const cartCount = useCartStore((s) => s.items.length);
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('/');
+  const activeLink = pathname;
   const [shopOpen, setShopOpen] = useState(false);
   const [benefitsHover, setBenefitsHover] = useState(false);
   const [mobileShopOpen, setMobileShopOpen] = useState(false);
@@ -56,8 +58,7 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                onClick={() => setActiveLink(link.href)}
-                className={`font-headline font-semibold text-sm tracking-tight transition-colors ${
+                                className={`font-headline font-semibold text-sm tracking-tight transition-colors ${
                   activeLink === link.href
                     ? 'text-primary border-b-2 border-primary pb-1'
                     : 'text-on-surface-variant hover:text-primary'
@@ -73,9 +74,9 @@ export default function Navbar() {
             <div className="flex items-center">
               <Link
                 href="/shop"
-                onClick={() => { setActiveLink('/shop'); setShopOpen(false); }}
+                onClick={() => { setShopOpen(false); }}
                 className={`font-headline font-semibold text-sm tracking-tight transition-colors ${
-                  activeLink === '/shop'
+                  activeLink.startsWith('/shop')
                     ? 'text-primary border-b-2 border-primary pb-1'
                     : 'text-on-surface-variant hover:text-primary'
                 }`}
@@ -97,7 +98,7 @@ export default function Navbar() {
               <div className="absolute top-full left-0 mt-2 w-48 rounded-xl bg-white border border-outline-variant shadow-lg py-2 z-50">
                 <Link
                   href="/shop?sort=bestsellers"
-                  onClick={() => { setActiveLink('/shop'); setShopOpen(false); }}
+                  onClick={() => { setShopOpen(false); }}
                   className="block px-4 py-2.5 font-headline font-semibold text-sm text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"
                 >
                   Bestsellers
@@ -119,7 +120,7 @@ export default function Navbar() {
                         <Link
                           key={cat.href}
                           href={cat.href}
-                          onClick={() => { setActiveLink('/shop'); setShopOpen(false); setBenefitsHover(false); }}
+                          onClick={() => { setShopOpen(false); setBenefitsHover(false); }}
                           className="block px-4 py-2.5 font-headline font-semibold text-sm text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"
                         >
                           {cat.label}
@@ -131,7 +132,7 @@ export default function Navbar() {
 
                 <Link
                   href="/shop"
-                  onClick={() => { setActiveLink('/shop'); setShopOpen(false); }}
+                  onClick={() => { setShopOpen(false); }}
                   className="block px-4 py-2.5 font-headline font-semibold text-sm text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"
                 >
                   Shop All
@@ -205,7 +206,6 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   onClick={() => {
-                    setActiveLink(link.href);
                     setMobileMenuOpen(false);
                   }}
                   className={`block font-headline font-semibold text-sm tracking-tight transition-colors ${
@@ -224,7 +224,7 @@ export default function Navbar() {
               <button
                 onClick={() => setMobileShopOpen(!mobileShopOpen)}
                 className={`flex items-center gap-1 font-headline font-semibold text-sm tracking-tight transition-colors ${
-                  activeLink === '/shop' ? 'text-primary' : 'text-on-surface-variant hover:text-primary'
+                  activeLink.startsWith('/shop') ? 'text-primary' : 'text-on-surface-variant hover:text-primary'
                 }`}
               >
                 Shop
@@ -237,7 +237,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/shop?sort=bestsellers"
-                      onClick={() => { setActiveLink('/shop'); setMobileMenuOpen(false); }}
+                      onClick={() => { setMobileMenuOpen(false); }}
                       className="block font-headline font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors"
                     >
                       Bestsellers
@@ -259,7 +259,7 @@ export default function Navbar() {
                           <li key={cat.href}>
                             <Link
                               href={cat.href}
-                              onClick={() => { setActiveLink('/shop'); setMobileMenuOpen(false); }}
+                              onClick={() => { setMobileMenuOpen(false); }}
                               className="block font-headline font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors"
                             >
                               {cat.label}
@@ -272,7 +272,7 @@ export default function Navbar() {
                   <li>
                     <Link
                       href="/shop"
-                      onClick={() => { setActiveLink('/shop'); setMobileMenuOpen(false); }}
+                      onClick={() => { setMobileMenuOpen(false); }}
                       className="block font-headline font-semibold text-sm text-on-surface-variant hover:text-primary transition-colors"
                     >
                       Shop All

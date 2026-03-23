@@ -11,6 +11,7 @@ export interface CartItem {
   dosageUnit: string;
   timingSchedule: string;
   isProtocol?: boolean;
+  protocolName?: string;
 }
 
 interface CartStore {

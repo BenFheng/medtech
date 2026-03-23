@@ -15,9 +15,10 @@ const durationOptions = [
 interface SubscriptionCtaProps {
   totalPrice: number;
   stack: Supplement[];
+  stackName?: string;
 }
 
-export default function SubscriptionCta({ totalPrice, stack }: SubscriptionCtaProps) {
+export default function SubscriptionCta({ totalPrice, stack, stackName }: SubscriptionCtaProps) {
   const router = useRouter();
   const { addItem } = useCartStore();
   const [duration, setDuration] = useState("Monthly Subscription");
@@ -47,6 +48,7 @@ export default function SubscriptionCta({ totalPrice, stack }: SubscriptionCtaPr
         dosageUnit: supp.dosage.unit,
         timingSchedule: supp.schedule,
         isProtocol: true,
+        protocolName: stackName || "Your Protocol",
       });
     }
     router.push("/cart");

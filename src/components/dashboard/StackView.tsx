@@ -133,6 +133,7 @@ export default function StackView({ stackName, version, am, pm, onSwap, onRemove
   const [swapTarget, setSwapTarget] = useState<Supplement | null>(null);
   const [viewMode, setViewMode] = useState<"grid" | "timeline">("grid");
   const [editing, setEditing] = useState(false);
+  const [editableName, setEditableName] = useState(`${stackName} ${version}`);
   const [addSearch, setAddSearch] = useState("");
   const allStack = [...am, ...pm.filter((p) => !am.some((a) => a.id === p.id))];
 
@@ -168,9 +169,18 @@ export default function StackView({ stackName, version, am, pm, onSwap, onRemove
           <span className="text-xs font-bold tracking-widest text-primary uppercase font-body">
             Current Configuration
           </span>
-          <h2 className="text-xl sm:text-2xl font-headline font-bold text-on-surface mt-1">
-            {stackName} {version}
-          </h2>
+          {editing ? (
+            <input
+              type="text"
+              value={editableName}
+              onChange={(e) => setEditableName(e.target.value)}
+              className="text-xl sm:text-2xl font-headline font-bold text-on-surface mt-1 bg-transparent border-b-2 border-primary focus:outline-none w-full"
+            />
+          ) : (
+            <h2 className="text-xl sm:text-2xl font-headline font-bold text-on-surface mt-1">
+              {editableName}
+            </h2>
+          )}
         </div>
         <div className="flex items-center gap-3">
           <div className="flex bg-surface-container rounded-lg p-1">

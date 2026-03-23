@@ -139,9 +139,14 @@ export default function CartPage() {
             {protocolItems.length > 0 && (
               <div className="mb-8">
                 <div className="flex items-center justify-between mb-4 gap-3">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className="material-symbols-outlined text-primary flex-shrink-0">science</span>
-                    <h2 className="font-headline font-bold text-lg sm:text-xl text-on-surface whitespace-nowrap">Your Protocol</h2>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary flex-shrink-0">science</span>
+                      <h2 className="font-headline font-bold text-lg sm:text-xl text-on-surface whitespace-nowrap">Your Protocol</h2>
+                    </div>
+                    {protocolItems[0]?.protocolName && (
+                      <p className="text-sm text-on-surface-variant mt-0.5 ml-8">{protocolItems[0].protocolName}</p>
+                    )}
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <DurationDropdown

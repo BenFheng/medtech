@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAssessmentStore } from "@/stores/assessment";
 import Navbar from "@/components/layout/Navbar";
@@ -14,8 +15,20 @@ const TOTAL_STEPS = 4;
 
 export default function AssessmentPage() {
   const router = useRouter();
-  const { currentStep, setStep, primaryFocus, frictionPoints, biometrics, completeAssessment } =
+  const { currentStep, setStep, primaryFocus, frictionPoints, biometrics, completeAssessment, isComplete, reset } =
     useAssessmentStore();
+  const [showExistingModal, setShowExistingModal] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (hydrated && isComplete) {
+      setShowExistingModal(true);
+    }
+  }, [hydrated, isComplete]);
 
   const canProceed = () => {
     switch (currentStep) {
@@ -39,6 +52,7 @@ export default function AssessmentPage() {
   const handleNext = () => {
     if (currentStep < TOTAL_STEPS) {
       setStep(currentStep + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       completeAssessment();
       router.push("/dashboard");
@@ -47,6 +61,7 @@ export default function AssessmentPage() {
 
   const handleBack = () => {
     if (currentStep > 1) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setStep(currentStep - 1);
     }
   };
@@ -68,6 +83,49 @@ export default function AssessmentPage() {
 
   return (
     <>
+      {/* Existing Assessment Modal */}
+      {showExistingModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl">
+            <div className="text-center mb-6">
+              <span className="material-symbols-outlined text-4xl text-primary mb-3 block">assignment</span>
+              <h2 className="font-headline font-bold text-2xl text-on-surface mb-2">
+                Assessment Found
+              </h2>
+              <p className="text-sm text-on-surface-variant">
+                You already have a completed assessment. Would you like to edit it or start fresh?
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => {
+                  setStep(1);
+                  setShowExistingModal(false);
+                }}
+                className="w-full vitality-gradient text-on-primary font-headline font-bold py-3 rounded-lg transition-all active:scale-95"
+              >
+                Edit Current Assessment
+              </button>
+              <button
+                onClick={() => {
+                  reset();
+                  setShowExistingModal(false);
+                }}
+                className="w-full bg-surface-container text-on-surface font-headline font-bold py-3 rounded-lg hover:bg-surface-container-high transition-all"
+              >
+                Start New Assessment
+              </button>
+              <button
+                onClick={() => router.push("/dashboard")}
+                className="w-full text-on-surface-variant font-headline font-semibold py-3 rounded-lg hover:text-on-surface transition-all text-sm"
+              >
+                Back to Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Navbar />
       <StepIndicator currentStep={currentStep} totalSteps={TOTAL_STEPS} />
 

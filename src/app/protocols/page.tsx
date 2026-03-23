@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/stores/cart";
+import { useProtocolStore } from "@/stores/protocols";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ProductJsonLd } from "@/components/seo/JsonLd";
@@ -16,6 +17,7 @@ const durationOptions = [
   { label: "1 Day", multiplier: 1 / 30 },
   { label: "2 Weeks", multiplier: 14 / 30 },
   { label: "1 Month", multiplier: 1 },
+  { label: "Monthly Subscription", multiplier: 1 },
 ];
 
 const stacks = [
@@ -57,6 +59,7 @@ const stacks = [
 function StackCard({ stack }: { stack: typeof stacks[number] }) {
   const router = useRouter();
   const { addItem } = useCartStore();
+  const { addProtocol } = useProtocolStore();
   const [duration, setDuration] = useState("1 Month");
   const multiplier = durationOptions.find((d) => d.label === duration)?.multiplier || 1;
 
@@ -150,9 +153,10 @@ function StackCard({ stack }: { stack: typeof stacks[number] }) {
                   dosageUnit: supp.dosage.unit,
                   timingSchedule: supp.schedule,
                   isProtocol: true,
+                  protocolName: `The "${stack.name}" Stack`,
                 });
               });
-              router.push("/checkout");
+              router.push("/cart");
             }}
             className="flex-1 vitality-gradient text-on-primary font-headline font-bold py-4 rounded-lg text-center transition-all active:scale-95"
           >
@@ -160,20 +164,8 @@ function StackCard({ stack }: { stack: typeof stacks[number] }) {
           </button>
           <button
             onClick={() => {
-              stackSupps.forEach((supp) => {
-                addItem({
-                  productId: supp.id,
-                  name: supp.name,
-                  pricePerMonth: supp.pricePerMonth,
-                  duration,
-                  durationMultiplier: multiplier,
-                  dosageAmount: supp.dosage.amount,
-                  dosageUnit: supp.dosage.unit,
-                  timingSchedule: supp.schedule,
-                  isProtocol: true,
-                });
-              });
-              router.push("/cart");
+              addProtocol(`The "${stack.name}" Stack`, stackSupps);
+              router.push("/dashboard");
             }}
             className="flex-1 bg-surface-container text-on-surface font-headline font-bold py-4 rounded-lg text-center hover:bg-surface-container-high transition-all"
           >

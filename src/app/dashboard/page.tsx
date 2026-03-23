@@ -7,6 +7,7 @@ import { useAssessmentStore } from "@/stores/assessment";
 import { generateRecommendation } from "@/lib/recommend";
 import { swapCompound, recalculatePrice } from "@/lib/stack";
 import type { RecommendedStack, Supplement } from "@/lib/types";
+import { useProtocolStore } from "@/stores/protocols";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DashboardTabs from "@/components/dashboard/DashboardTabs";
@@ -24,6 +25,7 @@ export default function DashboardPage() {
     useAssessmentStore();
   const [stack, setStack] = useState<RecommendedStack | null>(null);
   const [activeTab, setActiveTab] = useState("stack");
+  const { protocols, activeProtocolId, setActive: setActiveProtocol } = useProtocolStore();
   const [hydrated, setHydrated] = useState(false);
 
   // Wait for zustand to hydrate from localStorage before checking
@@ -124,7 +126,7 @@ export default function DashboardPage() {
         {/* Welcome Header */}
         <header className="mb-10">
           <h1 className="font-headline font-extrabold text-5xl tracking-tight text-on-surface mb-4">
-            Welcome back, {user?.firstName || "there"}.
+            Welcome back{user?.firstName ? `, ${user.firstName}` : ""}.
           </h1>
           <p className="text-xl text-on-surface-variant max-w-2xl font-body leading-relaxed">
             Your cellular analysis is complete. We&apos;ve generated an optimized
@@ -137,6 +139,54 @@ export default function DashboardPage() {
         <div style={{width: '100%', overflow: 'hidden'}}>
           {activeTab === "stack" && (
             <div className="space-y-8">
+              {/* Protocol tabs if user has saved protocols */}
+              {protocols.length > 0 && (
+                <div className="flex gap-2 overflow-x-auto pb-2">
+                  <button
+                    onClick={() => setActiveProtocol("")}
+                    className={`px-4 py-2 rounded-lg text-sm font-headline font-bold whitespace-nowrap transition-all ${
+                      !activeProtocolId || activeProtocolId === ""
+                        ? "bg-primary text-on-primary"
+                        : "bg-surface-container text-on-surface-variant hover:text-primary"
+                    }`}
+                  >
+                    {stack?.stackName || "My Assessment"}
+                  </button>
+                  {protocols.map((p) => (
+                    <button
+                      key={p.id}
+                      onClick={() => setActiveProtocol(p.id)}
+                      className={`px-4 py-2 rounded-lg text-sm font-headline font-bold whitespace-nowrap transition-all ${
+                        activeProtocolId === p.id
+                          ? "bg-primary text-on-primary"
+                          : "bg-surface-container text-on-surface-variant hover:text-primary"
+                      }`}
+                    >
+                      {p.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* Show saved protocol or assessment stack */}
+              {activeProtocolId && protocols.find((p) => p.id === activeProtocolId) ? (
+                (() => {
+                  const activeProtocol = protocols.find((p) => p.id === activeProtocolId)!;
+                  const protocolAm = activeProtocol.supplements.filter((s) => s.schedule === "AM" || s.schedule === "AM/PM");
+                  const protocolPm = activeProtocol.supplements.filter((s) => s.schedule === "PM" || s.schedule === "AM/PM");
+                  return (
+                    <StackView
+                      stackName={activeProtocol.name}
+                      version=""
+                      am={protocolAm}
+                      pm={protocolPm}
+                      onSwap={handleSwap}
+                      onRemove={handleRemove}
+                      onAdd={handleAdd}
+                    />
+                  );
+                })()
+              ) : (
               <StackView
                 stackName={stack.stackName}
                 version={stack.version}
@@ -146,9 +196,10 @@ export default function DashboardPage() {
                 onRemove={handleRemove}
                 onAdd={handleAdd}
               />
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <ProtocolFocus metrics={stack.focusMetrics} warnings={stack.warnings} />
-                <SubscriptionCta totalPrice={stack.totalPrice} stack={allSupps} />
+                <SubscriptionCta totalPrice={stack.totalPrice} stack={allSupps} stackName={`${stack.stackName} ${stack.version}`} />
               </div>
             </div>
           )}

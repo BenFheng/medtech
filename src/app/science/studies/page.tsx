@@ -18,7 +18,7 @@ export default function StudiesPage() {
   return (
     <>
       <Navbar />
-      <main className="max-w-screen-lg mx-auto px-4 sm:px-8 py-24">
+      <main className="mx-auto px-4 sm:px-8 py-12" style={{maxWidth: '1024px', width: '100%'}}>
         <span className="text-xs font-bold tracking-widest text-primary uppercase">Evidence Library</span>
         <h1 className="font-headline font-extrabold text-4xl md:text-5xl text-on-surface mt-4 tracking-tight">
           Clinical Studies
@@ -60,7 +60,8 @@ export default function StudiesPage() {
         </div>
 
         {/* Supplement List */}
-        <div className="mt-8 space-y-4">
+        <div className="mt-8 bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+        <div className="max-h-[600px] overflow-y-auto divide-y divide-outline-variant">
           {filtered.length === 0 ? (
             <div className="text-center py-12 text-on-surface-variant">
               <span className="material-symbols-outlined text-4xl mb-2">search_off</span>
@@ -68,7 +69,7 @@ export default function StudiesPage() {
             </div>
           ) : (
             filtered.map((supp) => (
-              <div key={supp.id} className="bg-surface-container-lowest rounded-xl p-6 flex items-center justify-between">
+              <div key={supp.id} className="p-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-black ${
                     supp.evidence.level === "A"
@@ -95,6 +96,7 @@ export default function StudiesPage() {
               </div>
             ))
           )}
+        </div>
         </div>
       </main>
       <Footer />
