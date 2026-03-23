@@ -24,8 +24,16 @@ export default function DashboardPage() {
     useAssessmentStore();
   const [stack, setStack] = useState<RecommendedStack | null>(null);
   const [activeTab, setActiveTab] = useState("stack");
+  const [hydrated, setHydrated] = useState(false);
+
+  // Wait for zustand to hydrate from localStorage before checking
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
+    if (!hydrated) return;
+
     if (!isComplete || !primaryFocus) {
       router.push("/assessment");
       return;
@@ -61,7 +69,7 @@ export default function DashboardPage() {
         // Silently fail — Supabase may not be configured yet
       });
     }
-  }, [isComplete, primaryFocus, frictionPoints, currentSupplements, currentMedications, router, user?.id]);
+  }, [hydrated, isComplete, primaryFocus, frictionPoints, currentSupplements, currentMedications, router, user?.id]);
 
   const handleAdd = (supplement: Supplement) => {
     if (!stack) return;
@@ -91,7 +99,7 @@ export default function DashboardPage() {
     setStack({ ...stack, am, pm, totalPrice: Math.max(totalPrice, 149) });
   };
 
-  if (!stack) {
+  if (!hydrated || !stack) {
     return (
       <>
         <Navbar />
