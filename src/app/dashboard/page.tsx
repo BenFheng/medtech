@@ -139,34 +139,32 @@ export default function DashboardPage() {
         <div style={{width: '100%', overflow: 'hidden'}}>
           {activeTab === "stack" && (
             <div className="space-y-8">
-              {/* Protocol tabs if user has saved protocols */}
-              {protocols.length > 0 && (
-                <div className="flex gap-2 overflow-x-auto pb-2">
+              {/* Protocol tabs */}
+              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                <button
+                  onClick={() => setActiveProtocol("")}
+                  className={`px-4 py-2 rounded-lg text-sm font-headline font-bold whitespace-nowrap transition-all flex-shrink-0 ${
+                    !activeProtocolId || activeProtocolId === ""
+                      ? "bg-primary text-on-primary"
+                      : "bg-surface-container text-on-surface-variant hover:text-primary"
+                  }`}
+                >
+                  {stack?.stackName ? `${stack.stackName} ${stack.version}` : "My Assessment"}
+                </button>
+                {protocols.map((p) => (
                   <button
-                    onClick={() => setActiveProtocol("")}
-                    className={`px-4 py-2 rounded-lg text-sm font-headline font-bold whitespace-nowrap transition-all ${
-                      !activeProtocolId || activeProtocolId === ""
+                    key={p.id}
+                    onClick={() => setActiveProtocol(p.id)}
+                    className={`px-4 py-2 rounded-lg text-sm font-headline font-bold whitespace-nowrap transition-all flex-shrink-0 ${
+                      activeProtocolId === p.id
                         ? "bg-primary text-on-primary"
                         : "bg-surface-container text-on-surface-variant hover:text-primary"
                     }`}
                   >
-                    {stack?.stackName || "My Assessment"}
+                    {p.name}
                   </button>
-                  {protocols.map((p) => (
-                    <button
-                      key={p.id}
-                      onClick={() => setActiveProtocol(p.id)}
-                      className={`px-4 py-2 rounded-lg text-sm font-headline font-bold whitespace-nowrap transition-all ${
-                        activeProtocolId === p.id
-                          ? "bg-primary text-on-primary"
-                          : "bg-surface-container text-on-surface-variant hover:text-primary"
-                      }`}
-                    >
-                      {p.name}
-                    </button>
-                  ))}
-                </div>
-              )}
+                ))}
+              </div>
 
               {/* Show saved protocol or assessment stack */}
               {activeProtocolId && protocols.find((p) => p.id === activeProtocolId) ? (
