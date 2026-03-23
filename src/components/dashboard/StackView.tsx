@@ -17,6 +17,8 @@ interface StackViewProps {
   onSwap?: (removeId: string, newSupplement: Supplement) => void;
   onRemove?: (id: string) => void;
   onAdd?: (supplement: Supplement) => void;
+  onDeleteStack?: () => void;
+  isActiveSubscription?: boolean;
 }
 
 function SupplementCard({
@@ -129,7 +131,7 @@ function SupplementCard({
   );
 }
 
-export default function StackView({ stackName, version, am, pm, onSwap, onRemove, onAdd }: StackViewProps) {
+export default function StackView({ stackName, version, am, pm, onSwap, onRemove, onAdd, onDeleteStack, isActiveSubscription }: StackViewProps) {
   const [swapTarget, setSwapTarget] = useState<Supplement | null>(null);
   const [viewMode, setViewMode] = useState<"grid" | "timeline">("grid");
   const [editing, setEditing] = useState(false);
@@ -166,9 +168,11 @@ export default function StackView({ stackName, version, am, pm, onSwap, onRemove
       <section className="bg-surface-container-lowest rounded-xl p-4">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
         <div>
-          <span className="text-xs font-bold tracking-widest text-primary uppercase font-body">
-            Current Configuration
-          </span>
+          {isActiveSubscription && (
+            <span className="text-xs font-bold tracking-widest text-primary uppercase font-body">
+              Current Active Subscription
+            </span>
+          )}
           {editing ? (
             <input
               type="text"
@@ -183,6 +187,15 @@ export default function StackView({ stackName, version, am, pm, onSwap, onRemove
           )}
         </div>
         <div className="flex items-center gap-3">
+          {editing && onDeleteStack && (
+            <button
+              onClick={onDeleteStack}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-headline font-bold bg-error/10 text-error hover:bg-error hover:text-on-error transition-all"
+            >
+              <span className="material-symbols-outlined text-base">delete</span>
+              Delete
+            </button>
+          )}
           <div className="flex bg-surface-container rounded-lg p-1">
             <button
               onClick={() => setViewMode("grid")}

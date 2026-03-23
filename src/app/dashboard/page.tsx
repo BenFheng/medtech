@@ -25,7 +25,7 @@ export default function DashboardPage() {
     useAssessmentStore();
   const [stack, setStack] = useState<RecommendedStack | null>(null);
   const [activeTab, setActiveTab] = useState("stack");
-  const { protocols, activeProtocolId, setActive: setActiveProtocol } = useProtocolStore();
+  const { protocols, activeProtocolId, setActive: setActiveProtocol, removeProtocol } = useProtocolStore();
   const [hydrated, setHydrated] = useState(false);
 
   // Wait for zustand to hydrate from localStorage before checking
@@ -181,6 +181,7 @@ export default function DashboardPage() {
                       onSwap={handleSwap}
                       onRemove={handleRemove}
                       onAdd={handleAdd}
+                      onDeleteStack={() => removeProtocol(activeProtocol.id)}
                     />
                   );
                 })()
@@ -192,12 +193,19 @@ export default function DashboardPage() {
                 pm={stack.pm}
                 onSwap={handleSwap}
                 onRemove={handleRemove}
+                isActiveSubscription
                 onAdd={handleAdd}
               />
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <ProtocolFocus metrics={stack.focusMetrics} warnings={stack.warnings} />
-                <SubscriptionCta totalPrice={stack.totalPrice} stack={allSupps} stackName={`${stack.stackName} ${stack.version}`} />
+                {(() => {
+                  const activeProto = activeProtocolId ? protocols.find((p) => p.id === activeProtocolId) : null;
+                  const ctaStack = activeProto ? activeProto.supplements : allSupps;
+                  const ctaPrice = activeProto ? activeProto.supplements.reduce((sum, s) => sum + s.pricePerMonth, 0) : stack.totalPrice;
+                  const ctaName = activeProto ? activeProto.name : `${stack.stackName} ${stack.version}`;
+                  return <SubscriptionCta totalPrice={ctaPrice} stack={ctaStack} stackName={ctaName} />;
+                })()}
               </div>
             </div>
           )}

@@ -16,6 +16,7 @@ interface ProtocolStore {
   removeProtocol: (id: string) => void;
   setActive: (id: string) => void;
   updateProtocol: (id: string, updates: Partial<Pick<SavedProtocol, "name" | "supplements">>) => void;
+  reorderProtocol: (id: string, direction: "left" | "right") => void;
 }
 
 export const useProtocolStore = create<ProtocolStore>()(
@@ -50,6 +51,17 @@ export const useProtocolStore = create<ProtocolStore>()(
             p.id === id ? { ...p, ...updates } : p
           ),
         })),
+
+      reorderProtocol: (id, direction) =>
+        set((state) => {
+          const idx = state.protocols.findIndex((p) => p.id === id);
+          if (idx < 0) return state;
+          const newIdx = direction === "left" ? idx - 1 : idx + 1;
+          if (newIdx < 0 || newIdx >= state.protocols.length) return state;
+          const arr = [...state.protocols];
+          [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
+          return { protocols: arr };
+        }),
     }),
     { name: "saved-protocols" }
   )
