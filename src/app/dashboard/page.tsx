@@ -217,7 +217,7 @@ export default function DashboardPage() {
           )}
 
           {activeTab === "orders" && (
-            <OrderSubscription stack={allSupps} totalPrice={stack.totalPrice} />
+            <OrderSubscription stack={allSupps} totalPrice={stack.totalPrice} stackName={`${stack.stackName} ${stack.version}`} />
           )}
         </div>
       </main>

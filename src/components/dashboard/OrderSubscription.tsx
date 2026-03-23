@@ -9,9 +9,10 @@ const allSupplements = supplementsData as Supplement[];
 interface OrderSubscriptionProps {
   stack: Supplement[];
   totalPrice: number;
+  stackName?: string;
 }
 
-export default function OrderSubscription({ stack: initialStack, totalPrice: initialPrice }: OrderSubscriptionProps) {
+export default function OrderSubscription({ stack: initialStack, totalPrice: initialPrice, stackName }: OrderSubscriptionProps) {
   const [editing, setEditing] = useState(false);
   const [paused, setPaused] = useState(false);
   const [stack, setStack] = useState(initialStack);
@@ -68,9 +69,14 @@ export default function OrderSubscription({ stack: initialStack, totalPrice: ini
       {/* Monthly Subscription + Cost Breakdown */}
       <section className="bg-surface-container-lowest rounded-xl p-4">
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-6 flex-wrap">
-            <h3 className="font-headline font-bold text-xl text-on-surface">Monthly Subscription</h3>
-            <span className="text-sm text-on-surface-variant">Next delivery: {new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
+          <div>
+            <div className="flex items-center gap-6 flex-wrap">
+              <h3 className="font-headline font-bold text-xl text-on-surface">Monthly Subscription</h3>
+              <span className="text-sm text-on-surface-variant">Next delivery: {new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
+            </div>
+            {stackName && (
+              <p className="text-sm text-on-surface-variant mt-1">{stackName}</p>
+            )}
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
             <span className="font-headline font-bold text-lg text-primary">${totalPrice}/mo</span>
