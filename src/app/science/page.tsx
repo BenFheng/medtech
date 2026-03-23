@@ -42,19 +42,19 @@ export default function SciencePage() {
               {
                 tier: "A",
                 label: "Strong Evidence",
-                color: "bg-primary text-on-primary",
+                color: "bg-emerald-500 text-white",
                 desc: "Multiple randomized controlled trials (RCTs), systematic reviews, or meta-analyses supporting efficacy. Consistent results across populations.",
               },
               {
                 tier: "B",
                 label: "Moderate Evidence",
-                color: "bg-secondary text-on-secondary",
+                color: "bg-amber-500 text-white",
                 desc: "Limited RCTs or strong mechanistic evidence with supportive clinical data. Promising results requiring further validation.",
               },
               {
                 tier: "C",
                 label: "Emerging Evidence",
-                color: "bg-outline text-white",
+                color: "bg-slate-400 text-white",
                 desc: "Preliminary studies, animal models, or traditional use with scientific rationale. Included only when risk profile is favorable.",
               },
             ].map((tier) => (

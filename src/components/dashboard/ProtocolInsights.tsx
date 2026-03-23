@@ -111,10 +111,10 @@ export default function ProtocolInsights({ stack, frictionPoints, metrics }: Pro
               <div className="flex items-center gap-3 mb-2">
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black ${
                   supp.evidence.level === "A"
-                    ? "bg-primary text-on-primary"
+                    ? "bg-emerald-500 text-white"
                     : supp.evidence.level === "B"
-                    ? "bg-secondary text-on-secondary"
-                    : "bg-outline text-white"
+                    ? "bg-amber-500 text-white"
+                    : "bg-slate-400 text-white"
                 }`}>
                   {supp.evidence.level}
                 </div>

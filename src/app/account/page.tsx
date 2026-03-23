@@ -9,7 +9,7 @@ import Footer from "@/components/layout/Footer";
 type Tab = "details" | "purchases" | "notes";
 
 const mockPurchases = [
-  { id: "ORD-2024-001", date: "2026-03-01", stack: "The Longevity Stack v2.4", amount: 189, status: "Delivered",
+  { id: "ORD-2024-001", date: "2026-03-01", deliveryDate: "2026-03-05", stack: "The Longevity Stack v2.4", amount: 189, status: "Delivered", individualItems: 0,
     items: [
       { name: "NMN", dosage: "500mg", price: 28 },
       { name: "Trans-Resveratrol", dosage: "500mg", price: 22 },
@@ -20,7 +20,7 @@ const mockPurchases = [
       { name: "Vitamin D3", dosage: "5000IU", price: 6 },
       { name: "Vitamin K2 MK-7", dosage: "200mcg", price: 10 },
     ]},
-  { id: "ORD-2024-002", date: "2026-02-01", stack: "The Longevity Stack v2.3", amount: 189, status: "Delivered",
+  { id: "ORD-2024-002", date: "2026-02-01", deliveryDate: "2026-02-05", stack: "The Longevity Stack v2.3", amount: 189, status: "Delivered", individualItems: 0,
     items: [
       { name: "NMN", dosage: "500mg", price: 28 },
       { name: "Trans-Resveratrol", dosage: "500mg", price: 22 },
@@ -31,7 +31,7 @@ const mockPurchases = [
       { name: "Vitamin D3", dosage: "5000IU", price: 6 },
       { name: "Vitamin K2 MK-7", dosage: "200mcg", price: 10 },
     ]},
-  { id: "ORD-2024-003", date: "2026-01-01", stack: "The Cognitive Stack v1.8", amount: 169, status: "Delivered",
+  { id: "ORD-2024-003", date: "2026-01-01", deliveryDate: "2026-01-06", stack: "The Cognitive Stack v1.8", amount: 169, status: "Delivered", individualItems: 2,
     items: [
       { name: "L-Theanine", dosage: "200mg", price: 8 },
       { name: "Alpha-GPC", dosage: "300mg", price: 16 },
@@ -349,8 +349,11 @@ export default function AccountPage() {
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
-            <div className="flex items-center justify-between mb-4 text-sm text-on-surface-variant">
-              <span>{selectedOrder.date}</span>
+            <div className="flex items-center justify-between mb-4">
+              <div className="space-y-1">
+                <p className="text-xs text-on-surface-variant">Order Date: <span className="font-semibold text-on-surface">{selectedOrder.date}</span></p>
+                <p className="text-xs text-on-surface-variant">Delivery Date: <span className="font-semibold text-on-surface">{selectedOrder.deliveryDate}</span></p>
+              </div>
               <span className="inline-block rounded-full bg-primary-fixed px-3 py-1 text-xs font-headline font-bold text-on-primary-fixed">
                 {selectedOrder.status}
               </span>
@@ -786,7 +789,12 @@ export default function AccountPage() {
                     <tr key={order.id} className="border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
                       <td className="px-6 py-4 font-body text-sm text-primary font-semibold cursor-pointer hover:underline" onClick={() => setSelectedOrder(order)}>{order.id}</td>
                       <td className="px-6 py-4 font-body text-sm text-on-surface-variant">{order.date}</td>
-                      <td className="px-6 py-4 font-body text-sm text-on-surface">{order.stack}</td>
+                      <td className="px-6 py-4 font-body text-sm text-on-surface">
+                        <span>{order.stack}</span>
+                        {order.individualItems > 0 && (
+                          <span className="block text-xs text-on-surface-variant mt-0.5">Items ({order.individualItems})</span>
+                        )}
+                      </td>
                       <td className="px-6 py-4 font-body text-sm text-on-surface font-semibold">${order.amount}</td>
                       <td className="px-6 py-4">
                         <span className="inline-block rounded-full bg-primary-fixed px-3 py-1 text-xs font-headline font-bold text-on-primary-fixed">

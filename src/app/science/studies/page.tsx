@@ -73,10 +73,10 @@ export default function StudiesPage() {
                 <div className="flex items-center gap-4">
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-black ${
                     supp.evidence.level === "A"
-                      ? "bg-primary text-on-primary"
+                      ? "bg-emerald-500 text-white"
                       : supp.evidence.level === "B"
-                      ? "bg-secondary text-on-secondary"
-                      : "bg-outline text-white"
+                      ? "bg-amber-500 text-white"
+                      : "bg-slate-400 text-white"
                   }`}>
                     {supp.evidence.level}
                   </div>
