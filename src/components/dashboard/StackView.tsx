@@ -257,9 +257,17 @@ export default function StackView({ stackName, version, am, pm, onSwap, onRemove
       {viewMode === "grid" ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
-            ...pm.map((s) => ({ supplement: s, schedule: "PM" as const })),
             ...am.map((s) => ({ supplement: s, schedule: "AM" as const })),
-          ].map(({ supplement, schedule }) => (
+            ...pm.filter((s) => !am.some((a) => a.id === s.id)).map((s) => ({ supplement: s, schedule: "PM" as const })),
+          ]
+          .sort((a, b) => {
+            const scheduleOrder = { AM: 0, "AM/PM": 1, PM: 2 };
+            const aOrder = scheduleOrder[a.schedule] ?? 1;
+            const bOrder = scheduleOrder[b.schedule] ?? 1;
+            if (aOrder !== bOrder) return aOrder - bOrder;
+            return a.supplement.name.localeCompare(b.supplement.name);
+          })
+          .map(({ supplement, schedule }) => (
             <SupplementCard
               key={supplement.id}
               supplement={supplement}

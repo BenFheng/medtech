@@ -120,7 +120,7 @@ export default function OrderSubscription({ stack: initialStack, totalPrice: ini
                 .filter((s) =>
                   (addSearch.length === 0 || s.name.toLowerCase().includes(addSearch.toLowerCase())) &&
                   (!categoryFilter || s.category === categoryFilter) &&
-                  (!scheduleFilter || s.schedule === scheduleFilter) &&
+
                   (!evidenceFilter || s.evidence.level === evidenceFilter) &&
                   !stack.some((existing) => existing.id === s.id)
                 )
@@ -141,7 +141,6 @@ export default function OrderSubscription({ stack: initialStack, totalPrice: ini
               {allSupplements.filter((s) =>
                 (addSearch.length === 0 || s.name.toLowerCase().includes(addSearch.toLowerCase())) &&
                 (!categoryFilter || s.category === categoryFilter) &&
-                (!scheduleFilter || s.schedule === scheduleFilter) &&
                 (!evidenceFilter || s.evidence.level === evidenceFilter) &&
                 !stack.some((existing) => existing.id === s.id)
               ).length === 0 && (
