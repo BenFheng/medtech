@@ -102,7 +102,7 @@ function StackCard({ stack }: { stack: typeof stacks[number] }) {
           <select
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            className="rounded-lg bg-on-primary/20 text-on-primary border-0 px-3 py-1.5 text-sm font-headline font-bold focus:outline-none focus:ring-2 focus:ring-on-primary/40 cursor-pointer"
+            className="rounded-lg bg-on-primary/20 text-on-primary border-0 px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-headline font-bold focus:outline-none focus:ring-2 focus:ring-on-primary/40 cursor-pointer max-w-[140px] sm:max-w-none"
           >
             {durationOptions.map((opt) => (
               <option key={opt.label} value={opt.label} className="text-on-surface bg-white">{opt.label}</option>
@@ -117,24 +117,30 @@ function StackCard({ stack }: { stack: typeof stacks[number] }) {
           {stackSupps.map((supp) => {
             const suppPrice = (supp.pricePerMonth * multiplier).toFixed(2);
             const displaySuppPrice = parseFloat(suppPrice) % 1 === 0 ? parseInt(suppPrice).toString() : suppPrice;
+            const isAM = supp.schedule === "AM" || supp.schedule === "AM/PM";
             return (
               <Link key={supp.id} href={`/shop/${supp.id}`} className="bg-surface-container-low rounded-lg p-4 hover:bg-surface-container transition-colors">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`material-symbols-outlined text-sm ${isAM ? "text-amber-500" : "text-indigo-400"}`} style={{ fontVariationSettings: "'FILL' 1" }}>
+                    {isAM ? "light_mode" : "dark_mode"}
+                  </span>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                    supp.evidence.level === "A"
+                      ? "bg-emerald-100 text-emerald-700"
+                      : supp.evidence.level === "B"
+                      ? "bg-amber-100 text-amber-700"
+                      : "bg-slate-100 text-slate-500"
+                  }`}>
+                    {supp.evidence.level === "A" ? "Strong" : supp.evidence.level === "B" ? "Moderate" : "Emerging"}
+                  </span>
+                </div>
                 <h4 className="font-headline font-bold text-sm text-on-surface">
                   {supp.name}
                 </h4>
                 <p className="text-xs text-on-surface-variant mt-1">
                   {supp.dosage.amount}{supp.dosage.unit}
                 </p>
-                <div className="flex items-center gap-2 mt-2">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                    supp.evidence.level === "A"
-                      ? "bg-primary-fixed text-primary"
-                      : "bg-surface-container text-on-surface-variant"
-                  }`}>
-                    {supp.evidence.level}
-                  </span>
-                  <span className="text-[10px] text-on-surface-variant">${displaySuppPrice}</span>
-                </div>
+                <span className="text-[10px] text-on-surface-variant mt-2 block">${displaySuppPrice}</span>
               </Link>
             );
           })}
